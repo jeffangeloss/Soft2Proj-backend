@@ -5,5 +5,4 @@ public enum TipoNodo {
     HTTP_REQUEST,
     COMMAND,
     CONDITIONAL,
-    FINAL
 }

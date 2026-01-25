@@ -5,21 +5,23 @@ import com.app.soft2projbackend.Nodo;
 import com.app.soft2projbackend.enums.TipoNodo;
 
 public class HttpRequestNode extends Nodo {
-    private String url;
     private String method;
+    private String url;
+    private String responseKey;
 
-    public HttpRequestNode(String name, String url, String method) {
+    public HttpRequestNode(String name, String method, String url, String responseKey) {
         super(name, TipoNodo.HTTP_REQUEST);
-        this.url = url;
         this.method = method;
+        this.url = url;
+        this.responseKey = responseKey;
     }
 
     @Override
     public void execute(ExecutionContext context) {
-        // Por ahora mock
-        System.out.println("Ejecutando HTTP " + method + " a " + url);
+        // mock de ejecución
+        System.out.println("HTTP " + method + " → " + url);
 
-        // Simular respuesta
-        context.put("httpResponse", "200 OK");
+        String fakeResponse = "{ \"status\": 200 }";
+        context.put(responseKey, fakeResponse);
     }
 }

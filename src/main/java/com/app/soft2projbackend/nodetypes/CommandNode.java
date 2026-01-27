@@ -1,7 +1,7 @@
 package com.app.soft2projbackend.nodetypes;
 
-import com.app.soft2projbackend.ExecutionContext;
-import com.app.soft2projbackend.Nodo;
+import com.app.soft2projbackend.model.ExecutionContext;
+import com.app.soft2projbackend.model.Nodo;
 import com.app.soft2projbackend.enums.*;
 
 public class CommandNode extends Nodo {

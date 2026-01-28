@@ -9,7 +9,7 @@ import tools.jackson.databind.ObjectMapper;
 @Service
 public class WorkflowService {
 
-    private final WorkflowRepository repository;
+    private final WorkflowRepository repository; // corregir, no deberia ser una interfaz
     private final WorkflowEngine engine;
     private final ObjectMapper objectMapper;
 

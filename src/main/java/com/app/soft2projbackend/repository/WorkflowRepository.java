@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkflowRepository extends JpaRepository<Workflow, Long> {
+    void save(WorkflowEntity entity);
 }

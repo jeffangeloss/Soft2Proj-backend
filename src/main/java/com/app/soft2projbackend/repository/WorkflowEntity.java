@@ -22,4 +22,6 @@ public class WorkflowEntity {
     public WorkflowEntity() {}
 
 
+    public void setWorkflowJson(String workflowJson) {
+    }
 }

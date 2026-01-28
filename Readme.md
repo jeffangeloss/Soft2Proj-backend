@@ -1,48 +1,62 @@
-flowbuilder-backend
+# Flowbuilder Backend
 
-Backend del proyecto Workflow Builder, encargado de la lógica de negocio y ejecución de workflows.
-Desarrollado con Spring Boot (Java) y conectado a un frontend en React.js mediante una API REST.
+Este es el núcleo del proyecto **Workflow Builder**, responsable de la lógica de negocio, la validación de estructuras y la ejecución técnica de los flujos de trabajo. El sistema actúa como un motor intermedio que procesa datos en formato JSON y se comunica bidireccionalmente con un frontend desarrollado en React.js.
 
-Soporta:
+## Capacidades del Sistema
 
-Recepción de workflows en formato JSON
+El backend ha sido diseñado para ofrecer robustez y escalabilidad, soportando las siguientes funciones críticas:
 
-Validación de flujos
+* **Procesamiento de Datos:** Recepción y parseo de workflows complejos en formato JSON.
+* **Motor de Ejecución:** Orquestación de tareas según la lógica definida en el flujo.
+* **Validación de Flujos:** Verificación de integridad para asegurar que no existan errores lógicos antes de la ejecución.
+* **Interfaz API:** Comunicación estandarizada mediante una API REST para integración con el frontend.
 
-Ejecución mediante un motor de workflows
+## Stack Tecnológico
 
-Comunicación directa con el frontend
+* **Lenguaje:** Java 17
+* **Framework:** Spring Boot
+* **Gestor de dependencias:** Maven
+* **Arquitectura:** API REST
 
-Proyecto Backend – Workflow Engine
-Requisitos previos
+---
 
-Java JDK (versión 17 o compatible)
-https://adoptium.net/
+## Requisitos Previos
 
-IntelliJ IDEA
-https://www.jetbrains.com/idea/
+Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 
-GitHub Desktop
-https://desktop.github.com/
+1.  **Java JDK 17** o superior: [Descargar desde Adoptium](https://adoptium.net/)
+2.  **IntelliJ IDEA**: [Descargar IDE](https://www.jetbrains.com/idea/)
+3.  **GitHub Desktop**: [Descargar aquí](https://desktop.github.com/)
 
-Obtener el proyecto
+---
 
-Abrir GitHub Desktop
+## Configuración e Instalación
 
-Iniciar sesión con tu cuenta de GitHub
+### 1. Obtención del Proyecto
+1.  Abre **GitHub Desktop**.
+2.  Inicia sesión con tu cuenta de GitHub.
+3.  Selecciona la opción para **Clonar el repositorio** del backend.
+4.  Elige la carpeta local de tu preferencia para guardar los archivos.
 
-Clonar el repositorio del backend
+### 2. Preparación en el IDE
+1.  Abre **IntelliJ IDEA**.
+2.  Selecciona la opción **Open** y navega hasta la carpeta donde clonaste el proyecto.
+3.  Al abrirlo, espera a que **Maven** descargue automáticamente todas las dependencias necesarias (esto puede tardar unos minutos dependiendo de tu conexión).
 
-Seleccionar la carpeta donde se guardará el proyecto
+### 3. Ejecución
+1.  Localiza la clase principal del proyecto dentro de la estructura de paquetes.
+2.  Ejecuta la aplicación (Run).
+3.  Confirma que el servidor está activo verificando que el log indique el inicio en el puerto **8080**.
 
-Abrir y ejecutar el proyecto
+---
 
-Abrir IntelliJ IDEA
+## Estructura de Datos (Workflow)
 
-Seleccionar Open y elegir la carpeta del proyecto
+El motor procesa la información bajo el siguiente esquema lógico:
 
-Esperar a que Maven descargue las dependencias
+* **Cabecera:** Datos de identificación del workflow.
+* **Nodos:** Representación de cada paso o tarea dentro del proceso.
+* **Conexiones:** Definición de la secuencia y dependencias entre tareas.
+* **Reglas:** Validaciones que determinan el éxito o fallo de la ejecución.
 
-Ejecutar la clase principal del proyecto
-
-Verificar que el servidor inicie correctamente en el puerto 8080
+---

@@ -6,17 +6,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/workflows")
 @CrossOrigin(origins = "http://localhost:3000")
-
 public class WorkflowController {
 
-    private final WorkflowEngine workflowEngine;
+    private final WorkflowService workflowService;
 
-    public WorkflowController(WorkflowEngine engine) {
-        this.workflowEngine = engine;
+    public WorkflowController(WorkflowService workflowService) {
+        this.workflowService = workflowService;
     }
 
     @PostMapping("/run")
-    public ExecutionContext runWorkflow(@RequestBody Workflow workflow) {
-        return workflowEngine.run(workflow);
+    public ExecutionContext runWorkflow(@RequestBody String workflowJson) throws Exception {
+        return workflowService.runAndSave(workflowJson);
     }
 }

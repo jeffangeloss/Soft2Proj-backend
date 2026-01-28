@@ -13,8 +13,7 @@ public class Connection {
 
     public boolean matches(Boolean result) {
         if (condition == null) return true;
-        boolean r = condition == result.toString();
-        return r;
+        return condition.equalsIgnoreCase(result.toString());
     }
 
     public String getFromNodeId() {

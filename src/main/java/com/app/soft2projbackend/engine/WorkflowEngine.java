@@ -4,12 +4,14 @@ import com.app.soft2projbackend.enums.*;
 import com.app.soft2projbackend.model.Connection;
 import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Nodo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class WorkflowEngine {
 
-    public void run(Workflow workflow) {
+    public ExecutionContext run(Workflow workflow) {
 
         ExecutionContext context = new ExecutionContext();
         Nodo current = workflow.getStartNode();
@@ -25,6 +27,7 @@ public class WorkflowEngine {
                 current = getNextNode(workflow, current, context);
             }
         }
+        return context;
     }
 
     private Nodo getNextNode(Workflow workflow, Nodo current, ExecutionContext context) {

@@ -1,7 +1,6 @@
 package com.app.soft2projbackend.handlers;
 
-import com.app.soft2projbackend.engine.WorkflowEngine;
-import com.app.soft2projbackend.engine.WorkflowMap;
+import com.app.soft2projbackend.model.WorkflowMap;
 import com.app.soft2projbackend.model.ExecutionContext;
 import org.springframework.web.bind.annotation.*;
 

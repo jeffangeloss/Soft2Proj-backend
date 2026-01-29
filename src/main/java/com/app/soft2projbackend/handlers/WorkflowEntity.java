@@ -1,3 +1,4 @@
+/*
 package com.app.soft2projbackend.handlers;
 
 import jakarta.persistence.*;
@@ -25,3 +26,5 @@ public class WorkflowEntity {
     public void setWorkflowJson(String workflowJson) {
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-//corregir, no JPA
+/*corregir, no JPA
 
 package com.app.soft2projbackend.handlers;
 
@@ -10,3 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface WorkflowRepository extends JpaRepository<WorkflowMap, Long> {
     void save(WorkflowEntity entity);
 }
+
+ */

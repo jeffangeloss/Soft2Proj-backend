@@ -29,9 +29,9 @@ public class WorkflowService {
         repository.save(entity);
 
         // 2. Convertir JSON a objeto
-        Workflow workflow = objectMapper.readValue(workflowJson, Workflow.class);
+        WorkflowMap workflowMap = objectMapper.readValue(workflowJson, WorkflowMap.class);
 
         // 3. Ejecutar motor
-        return engine.run(workflow);
+        return engine.run(workflowMap);
     }
 }

@@ -6,13 +6,13 @@ import com.app.soft2projbackend.enums.TipoNodo;
 
 import java.util.*;
 
-public class Workflow {
+public class WorkflowMap {
     private String id;
     private String name;
     private Map<String, Nodo> nodes = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
 
-    public Workflow(String name) {
+    public WorkflowMap(String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
     }

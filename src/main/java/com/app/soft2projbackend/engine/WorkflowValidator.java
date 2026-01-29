@@ -3,9 +3,9 @@ package com.app.soft2projbackend.engine;
 import com.app.soft2projbackend.enums.TipoNodo;
 
 public class WorkflowValidator {
-    public void validate(Workflow workflow) {
+    public void validate(WorkflowMap workflowMap) {
 
-        long startCount = workflow.getNodos().values().stream()
+        long startCount = workflowMap.getNodos().values().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .count();
 

@@ -2,7 +2,9 @@ package com.app.soft2projbackend.handlers;
 
 import com.app.soft2projbackend.engine.WorkflowMap;
 import com.app.soft2projbackend.model.TipoNodo;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WorkflowValidator {
     public void validate(WorkflowMap workflowMap) {
 

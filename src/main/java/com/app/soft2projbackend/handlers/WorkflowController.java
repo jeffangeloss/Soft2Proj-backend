@@ -1,5 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
+import com.app.soft2projbackend.engine.WorkflowEngine;
+import com.app.soft2projbackend.engine.WorkflowMap;
 import com.app.soft2projbackend.model.ExecutionContext;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,14 +10,22 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class WorkflowController {
 
-    private final WorkflowService workflowService;
+    private final WorkflowEngine workflowEngine;
+    private final WorkflowValidator workflowValidator;
 
-    public WorkflowController(WorkflowService workflowService) {
-        this.workflowService = workflowService;
+    public WorkflowController(WorkflowEngine workflowEngine,
+                              WorkflowValidator workflowValidator) {
+        this.workflowEngine = workflowEngine;
+        this.workflowValidator = workflowValidator;
     }
 
     @PostMapping("/run")
-    public ExecutionContext runWorkflow(@RequestBody String workflowJson) throws Exception {
-        return workflowService.runAndSave(workflowJson);
+    public ExecutionContext runWorkflow(@RequestBody WorkflowMap workflow) {
+
+        // Validar estructura del workflow
+        workflowValidator.validate(workflow);
+
+        // Ejecutar workflow
+        return workflowEngine.run(workflow);
     }
 }

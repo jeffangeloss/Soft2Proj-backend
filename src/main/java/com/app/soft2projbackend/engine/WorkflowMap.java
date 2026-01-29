@@ -28,6 +28,8 @@ public class WorkflowMap {
     public Nodo getNode(String id) {
         return nodes.get(id);
     }
+    public String getId(){return id;}
+    public String getName(){return name;}
 
     public Nodo getStartNode() {
         return nodes.values().stream()

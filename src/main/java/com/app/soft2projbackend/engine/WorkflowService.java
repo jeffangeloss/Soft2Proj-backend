@@ -2,6 +2,7 @@ package com.app.soft2projbackend.engine;
 
 import com.app.soft2projbackend.exceptions.WorkflowAlreadyExistsException;
 import com.app.soft2projbackend.exceptions.WorkflowNotFoundException;
+import com.app.soft2projbackend.model.WorkflowMap;
 import org.springframework.stereotype.Service;
 import java.util.*;
 

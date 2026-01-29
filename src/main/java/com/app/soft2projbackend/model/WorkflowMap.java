@@ -31,6 +31,8 @@ public class WorkflowMap {
     public void setConnections(List<Connection> connections) {
         this.connections = connections;
     }
+    public String getId(){return id;}
+    public String getName(){return name;}
 
     public List<Nodo> getNodos() {
         return nodes;

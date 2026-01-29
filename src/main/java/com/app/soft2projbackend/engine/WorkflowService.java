@@ -24,7 +24,7 @@ public class WorkflowService
             throw new WorkflowAlreadyExistsException(name);
         }
 
-        WorkflowMap workflow = new WorkflowMap(name);
+        WorkflowMap workflow = new WorkflowMap();
         workflows.put(workflow.getId(), workflow);
         return workflow;
     }

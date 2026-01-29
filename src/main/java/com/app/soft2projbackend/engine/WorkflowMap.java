@@ -21,6 +21,9 @@ public class WorkflowMap {
                 .orElseThrow();
     }
 
+    public String getId(){return id;}
+    public String getName(){return name;}
+
     public Map<String, Nodo> getNodos() {
         return nodes;
     }

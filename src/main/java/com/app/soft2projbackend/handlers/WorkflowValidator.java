@@ -1,6 +1,6 @@
 package com.app.soft2projbackend.handlers;
 
-import com.app.soft2projbackend.engine.WorkflowMap;
+import com.app.soft2projbackend.model.WorkflowMap;
 import com.app.soft2projbackend.model.TipoNodo;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class WorkflowValidator {
     public void validate(WorkflowMap workflowMap) {
 
-        long startCount = workflowMap.getNodos().values().stream()
+        long startCount = workflowMap.getNodos().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .count();
 

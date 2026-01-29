@@ -2,7 +2,7 @@
 
 package com.app.soft2projbackend.handlers;
 
-import com.app.soft2projbackend.engine.WorkflowMap;
+import com.app.soft2projbackend.model.WorkflowMap;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

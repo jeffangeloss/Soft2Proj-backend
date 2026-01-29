@@ -1,7 +1,5 @@
 package com.app.soft2projbackend.model;
 
-import com.app.soft2projbackend.enums.*;
-
 import java.util.UUID;
 
 public abstract class Nodo {

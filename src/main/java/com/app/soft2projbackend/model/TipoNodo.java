@@ -1,4 +1,4 @@
-package com.app.soft2projbackend.enums;
+package com.app.soft2projbackend.model;
 
 public enum TipoNodo {
     START,

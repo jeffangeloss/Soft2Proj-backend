@@ -2,7 +2,7 @@ package com.app.soft2projbackend.nodetypes;
 
 import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Nodo;
-import com.app.soft2projbackend.enums.TipoNodo;
+import com.app.soft2projbackend.model.TipoNodo;
 
 public class HttpRequestNode extends Nodo {
     private String method;

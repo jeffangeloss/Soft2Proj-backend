@@ -1,9 +1,6 @@
 package com.app.soft2projbackend.engine;
 
-import com.app.soft2projbackend.enums.*;
-import com.app.soft2projbackend.model.Connection;
-import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Nodo;
+import com.app.soft2projbackend.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

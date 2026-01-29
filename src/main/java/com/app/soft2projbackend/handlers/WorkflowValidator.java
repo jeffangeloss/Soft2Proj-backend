@@ -1,7 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
 import com.app.soft2projbackend.engine.WorkflowMap;
-import com.app.soft2projbackend.enums.TipoNodo;
+import com.app.soft2projbackend.model.TipoNodo;
 
 public class WorkflowValidator {
     public void validate(WorkflowMap workflowMap) {

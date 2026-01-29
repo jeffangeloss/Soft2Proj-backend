@@ -9,18 +9,10 @@ import java.util.*;
 public class WorkflowMap {
     private String id;
     private String name;
-    private Map<String, Nodo> nodes = new HashMap<>();
+    private List<Nodo> nodes = new ArrayList<>();
     private List<Connection> connections = new ArrayList<>();
 
-    public WorkflowMap() {}
-
-    public void addNode(Nodo node) {
-        nodes.put(node.getId(), node);
-    }
-
-    public Nodo getNode(String id) {
-        return nodes.get(id);
-    }
+    public WorkflowMap() {} //constructor vacio obligatorio, no cambiar, será usado por Springboot
 
     public Nodo getStartNode() {
         return nodes.values().stream()
@@ -37,5 +29,32 @@ public class WorkflowMap {
         return connections.stream()
                 .filter(c -> c.getFromNodeId().equals(nodeId))
                 .toList();
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNodes(List<Nodo> nodes) {
+        this.nodes = nodes;
+    }
+
+    public void setConnections(List<Connection> connections) {
+        this.connections = connections;
+    }
+
+    public List<Connection> getConnections() {
+        return connections;
+    }
+
+    public Nodo getStartNode() {
+        return nodes.stream()
+                .filter(n -> n.getType() == TipoNodo.START)
+                .findFirst()
+                .orElseThrow();
     }
 }

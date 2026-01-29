@@ -46,4 +46,13 @@ public class WorkflowMap {
                 .findFirst()
                 .orElseThrow();
     }
+
+    public Nodo getNodeById(String id) {
+        return nodes.stream()
+                .filter(n -> n.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Nodo no encontrado: " + id)
+                );
+    }
 }

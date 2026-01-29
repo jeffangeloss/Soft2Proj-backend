@@ -36,10 +36,10 @@ public class WorkflowEngine {
             return outs.stream()
                     .filter(c -> c.matches(result))
                     .findFirst()
-                    .map(c -> workflowMap.getNode(c.getToNodeId()))
+                    .map(c -> workflowMap.getNodeById(c.getToNodeId()))
                     .orElse(null);
         }
 
-        return outs.isEmpty() ? null : workflowMap.getNode(outs.get(0).getToNodeId());
+        return outs.isEmpty() ? null : workflowMap.getNodeById(outs.get(0).getToNodeId());
     }
 }

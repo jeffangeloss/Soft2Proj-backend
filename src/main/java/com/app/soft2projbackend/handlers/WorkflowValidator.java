@@ -1,5 +1,6 @@
-package com.app.soft2projbackend.engine;
+package com.app.soft2projbackend.handlers;
 
+import com.app.soft2projbackend.engine.WorkflowMap;
 import com.app.soft2projbackend.enums.TipoNodo;
 
 public class WorkflowValidator {

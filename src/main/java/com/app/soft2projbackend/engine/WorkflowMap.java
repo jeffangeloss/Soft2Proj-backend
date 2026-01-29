@@ -12,17 +12,10 @@ public class WorkflowMap {
     private Map<String, Nodo> nodes = new HashMap<>();
     private List<Connection> connections = new ArrayList<>();
 
-    public WorkflowMap(String name) {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
-    }
+    public WorkflowMap() {}
 
     public void addNode(Nodo node) {
         nodes.put(node.getId(), node);
-    }
-
-    public void addConnection(Connection connection) {
-        connections.add(connection);
     }
 
     public Nodo getNode(String id) {

@@ -1,4 +1,4 @@
-package com.app.soft2projbackend.repository;
+package com.app.soft2projbackend.handlers;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

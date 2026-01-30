@@ -1,21 +1,52 @@
 package com.app.soft2projbackend.handlers;
 
 import com.app.soft2projbackend.model.Flow;
+import com.app.soft2projbackend.model.Nodo;
 import com.app.soft2projbackend.model.TipoNodo;
+import com.app.soft2projbackend.model.Connection;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class Validator {
+
     public void validate(Flow flow) {
-
-        long startCount = flow.getNodos().stream()
+        List<Nodo> startNodes = flow.getNodos().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
-                .count();
+                .toList();
 
-        if (startCount != 1) {
-            throw new IllegalStateException("Workflow debe tener exactamente un START");
+        if (startNodes.size() != 1) {
+            throw new IllegalStateException("El workflow debe tener exactamente un nodo START.");
+        }
+        checkConnectivity(flow, startNodes.get(0));
+    }
+
+    private void checkConnectivity(Flow flow, Nodo startNode) {
+        Set<String> visitedIds = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+
+        queue.add(startNode.getId());
+        visitedIds.add(startNode.getId());
+
+        while (!queue.isEmpty()) {
+            String currentId = queue.poll();
+            List<Connection> connections = flow.getConnectionsFrom(currentId);
+
+            for (Connection conn : connections) {
+                String toId = conn.getToNodeId();
+                if (!visitedIds.contains(toId)) {
+                    visitedIds.add(toId);
+                    queue.add(toId);
+                }
+            }
         }
 
-        // Validaciones más avanzadas luego
+        if (visitedIds.size() < flow.getNodos().size()) {
+            List<String> allIds = flow.getNodos().stream().map(Nodo::getId).collect(Collectors.toList());
+            allIds.removeAll(visitedIds);
+            throw new IllegalStateException("Nodos no alcanzables detectados (flujo roto): " + allIds);
+        }
     }
 }

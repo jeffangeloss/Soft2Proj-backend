@@ -1,5 +1,8 @@
 package com.app.soft2projbackend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExecutionContext {
 
     private List<Variable> variables = new ArrayList<>();

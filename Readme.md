@@ -54,7 +54,7 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 
 El motor procesa la información bajo el siguiente esquema lógico:
 
-* **Cabecera:** Datos de identificación del workflowMap.
+* **Cabecera:** Datos de identificación del flow.
 * **Nodos:** Representación de cada paso o tarea dentro del proceso.
 * **Conexiones:** Definición de la secuencia y dependencias entre tareas.
 * **Reglas:** Validaciones que determinan el éxito o fallo de la ejecución.

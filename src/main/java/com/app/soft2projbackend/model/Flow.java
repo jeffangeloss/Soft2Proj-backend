@@ -2,13 +2,13 @@ package com.app.soft2projbackend.model;
 
 import java.util.*;
 
-public class WorkflowMap {
+public class Flow {
     private String id;
     private String name;
     private List<Nodo> nodes = new ArrayList<>();
     private List<Connection> connections = new ArrayList<>();
 
-    public WorkflowMap() {} //constructor vacio obligatorio, no cambiar, será usado por Springboot
+    public Flow() {} //constructor vacio obligatorio, no cambiar, será usado por Springboot
 
     public List<Connection> getConnectionsFrom(String nodeId) {
         return connections.stream()

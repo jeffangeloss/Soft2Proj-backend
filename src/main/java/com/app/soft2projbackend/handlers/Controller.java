@@ -30,4 +30,9 @@ public class Controller {
         // Ejecutar workflow
         return engine.run(workflow);
     }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
 }

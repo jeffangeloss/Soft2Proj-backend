@@ -1,20 +1,28 @@
 package com.app.soft2projbackend.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ExecutionContext {
-    private Map<String, Object> data = new HashMap<>();
+
+    private List<Variable> variables = new ArrayList<>();
 
     public void put(String key, Object value) {
-        data.put(key, value);
+        variables.stream()
+                .filter(v -> v.getKey().equals(key))
+                .findFirst()
+                .ifPresentOrElse(
+                        v -> v.setValue(value),
+                        () -> variables.add(new Variable(key, value))
+                );
     }
 
     public Object get(String key) {
-        return data.get(key);
+        return variables.stream()
+                .filter(v -> v.getKey().equals(key))
+                .map(Variable::getValue)
+                .findFirst()
+                .orElse(null);
     }
 
-    public Map<String, Object> getAll() {
-        return data;
+    public List<Variable> getAll() {
+        return variables;
     }
 }

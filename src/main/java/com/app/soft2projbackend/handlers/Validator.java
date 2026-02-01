@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Validator {
 
     public void validate(Flow flow) {
-        List<Node> startNodes = flow.getNodos().stream()
+        List<Node> startNodes = flow.getNodes().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .toList();
 
@@ -43,8 +43,8 @@ public class Validator {
             }
         }
 
-        if (visitedIds.size() < flow.getNodos().size()) {
-            List<String> allIds = flow.getNodos().stream().map(Node::getId).collect(Collectors.toList());
+        if (visitedIds.size() < flow.getNodes().size()) {
+            List<String> allIds = flow.getNodes().stream().map(Node::getId).collect(Collectors.toList());
             allIds.removeAll(visitedIds);
             throw new IllegalStateException("Nodos no alcanzables detectados (flujo roto): " + allIds);
         }

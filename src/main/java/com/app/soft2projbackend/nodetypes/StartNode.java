@@ -6,7 +6,8 @@ import com.app.soft2projbackend.model.TipoNodo;
 
 public class StartNode extends Nodo {
     public StartNode(String name) {
-        super(name, TipoNodo.START);
+        this.name = name;
+        this.type = TipoNodo.START;
     }
 
     @Override

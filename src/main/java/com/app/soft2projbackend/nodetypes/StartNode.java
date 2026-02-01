@@ -16,7 +16,7 @@ public class StartNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        context.put("started", true); //Crea variable de inicio
+        context.put("started", true); //Crea variable de inicio y la inserta en ExcecutionContext
         System.out.println("Workflow iniciado");
     }
 }

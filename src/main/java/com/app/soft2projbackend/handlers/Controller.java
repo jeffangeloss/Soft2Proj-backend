@@ -15,8 +15,7 @@ public class Controller {
     private final Engine engine;
     private final Validator validator;
 
-    public Controller(Engine engine,
-                      Validator validator) {
+    public Controller(Engine engine, Validator validator) {
         this.engine = engine;
         this.validator = validator;
     }

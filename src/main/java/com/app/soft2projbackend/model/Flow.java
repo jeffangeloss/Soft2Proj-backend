@@ -11,7 +11,7 @@ public class Flow {
     private List<Node> nodes = new ArrayList<>();
     private List<Connection> connections = new ArrayList<>();
 
-    public Flow() {} // Requerido por Spring Boot para mapeo de @RequestBody
+    public Flow() {}
 
     /**
      * Filtra y retorna todas las conexiones salientes de un nodo específico.

@@ -14,13 +14,13 @@ import com.fasterxml.jackson.annotation.*;
         @JsonSubTypes.Type(value = ConditionalNode.class, name = "CONDITIONAL"),
         @JsonSubTypes.Type(value = HttpRequestNode.class, name = "HTTP")
 })
-public abstract class Nodo {
+public abstract class Node {
     protected String id;
     protected String name;
     protected TipoNodo type;
     protected PoliticaError politica;
 
-    protected Nodo() {}
+    protected Node() {}
 
     public String getId() {
         return id;

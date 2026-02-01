@@ -5,7 +5,7 @@ import java.util.*;
 public class Flow {
     private String id;
     private String name;
-    private List<Nodo> nodes = new ArrayList<>();
+    private List<Node> nodes = new ArrayList<>();
     private List<Connection> connections = new ArrayList<>();
 
     public Flow() {} //constructor vacio obligatorio, no cambiar, será usado por Springboot
@@ -24,13 +24,13 @@ public class Flow {
         this.name = name;
     }
 
-    public void setNodes(List<Nodo> nodes) {
+    public void setNodes(List<Node> nodes) {
         this.nodes = nodes;
-    }
+    } //setter debe coincidir con JSON
 
     public void setConnections(List<Connection> connections) {
         this.connections = connections;
-    }
+    } //setter debe coincidir con JSON
 
     public String getId(){
         return id;
@@ -40,7 +40,7 @@ public class Flow {
         return name;
     }
 
-    public List<Nodo> getNodos() {
+    public List<Node> getNodos() {
         return nodes;
     }
 
@@ -48,14 +48,14 @@ public class Flow {
         return connections;
     }
 
-    public Nodo getStartNode() {
+    public Node getStartNode() {
         return nodes.stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .findFirst()
                 .orElseThrow();
     }
 
-    public Nodo getNodeById(String id) {
+    public Node getNodeById(String id) {
         return nodes.stream()
                 .filter(n -> n.getId().equals(id))
                 .findFirst()

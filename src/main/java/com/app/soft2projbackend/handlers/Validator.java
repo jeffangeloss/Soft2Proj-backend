@@ -1,7 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
 import com.app.soft2projbackend.model.Flow;
-import com.app.soft2projbackend.model.Nodo;
+import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.TipoNodo;
 import com.app.soft2projbackend.model.Connection;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Validator {
 
     public void validate(Flow flow) {
-        List<Nodo> startNodes = flow.getNodos().stream()
+        List<Node> startNodes = flow.getNodos().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .toList();
 
@@ -23,7 +23,7 @@ public class Validator {
         checkConnectivity(flow, startNodes.get(0));
     }
 
-    private void checkConnectivity(Flow flow, Nodo startNode) {
+    private void checkConnectivity(Flow flow, Node startNode) {
         Set<String> visitedIds = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
 
@@ -44,7 +44,7 @@ public class Validator {
         }
 
         if (visitedIds.size() < flow.getNodos().size()) {
-            List<String> allIds = flow.getNodos().stream().map(Nodo::getId).collect(Collectors.toList());
+            List<String> allIds = flow.getNodos().stream().map(Node::getId).collect(Collectors.toList());
             allIds.removeAll(visitedIds);
             throw new IllegalStateException("Nodos no alcanzables detectados (flujo roto): " + allIds);
         }

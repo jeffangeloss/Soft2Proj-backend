@@ -11,7 +11,7 @@ public class Engine {
     public ExecutionContext run(Flow flow) {
 
         ExecutionContext context = new ExecutionContext();
-        Nodo current = flow.getStartNode();
+        Node current = flow.getStartNode();
 
         while (current != null) {
             try {
@@ -27,7 +27,7 @@ public class Engine {
         return context;
     }
 
-    private Nodo getNextNode(Flow flow, Nodo current, ExecutionContext context) {
+    private Node getNextNode(Flow flow, Node current, ExecutionContext context) {
 
         List<Connection> outs = flow.getConnectionsFrom(current.getId());
 

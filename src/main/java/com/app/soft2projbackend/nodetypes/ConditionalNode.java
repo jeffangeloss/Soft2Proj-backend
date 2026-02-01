@@ -1,10 +1,10 @@
 package com.app.soft2projbackend.nodetypes;
 
 import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Nodo;
+import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.TipoNodo;
 
-public class ConditionalNode extends Nodo {
+public class ConditionalNode extends Node {
     private String contextKey;
     private String operator;
     private Object expectedValue;

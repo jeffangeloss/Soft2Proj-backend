@@ -1,10 +1,10 @@
 package com.app.soft2projbackend.nodetypes;
 
 import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Nodo;
+import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.TipoNodo;
 
-public class CommandNode extends Nodo {
+public class CommandNode extends Node {
     private String command;
     private String outputKey;
 

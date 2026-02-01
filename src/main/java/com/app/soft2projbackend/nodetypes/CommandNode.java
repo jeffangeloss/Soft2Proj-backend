@@ -7,8 +7,6 @@ import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.PoliticaError;
 import com.app.soft2projbackend.model.TipoNodo;
 
-import java.util.Map;
-
 public class CommandNode extends Node {
     private String commandType;
     private String key;

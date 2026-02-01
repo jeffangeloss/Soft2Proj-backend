@@ -3,10 +3,6 @@ package com.app.soft2projbackend.model;
 import com.app.soft2projbackend.nodetypes.*;
 import com.fasterxml.jackson.annotation.*;
 
-/**
- * Clase abstracta base para todos los componentes del grafo.
- * como START o COMMAND basándose en la propiedad 'type' del JSON.
- */
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -19,15 +15,14 @@ import com.fasterxml.jackson.annotation.*;
         @JsonSubTypes.Type(value = HttpRequestNode.class, name = "HTTP")
 })
 public abstract class Node {
-    protected String id; // Identificador único del nodo sincronizado con el frontend
+    protected String id;
     protected String name;
     protected TipoNodo type;
     protected PoliticaError politica;
     protected String message;
 
-    protected Node() {} // Constructor necesario para la deserialización de frameworks
+    protected Node() {} // Constructor vacío necesario
 
-    // Getters y Setters para inyección de datos desde el controlador
     public String getId() { return id; }
     public String getName() { return name; }
     public TipoNodo getType() { return type; }

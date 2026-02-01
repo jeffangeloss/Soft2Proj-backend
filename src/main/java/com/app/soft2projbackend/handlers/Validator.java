@@ -51,7 +51,7 @@ public class Validator {
             }
         }
 
-        // Garantiza que el flujo enviado sea un solo bloque de trabajo conectado
+        // Garantiza que el flujo enviado sea un solo bloque de trabajo conectado .
         if (visitedIds.size() < flow.getNodes().size()) {
             List<String> allIds = flow.getNodes().stream().map(Node::getId).collect(Collectors.toList());
             allIds.removeAll(visitedIds);

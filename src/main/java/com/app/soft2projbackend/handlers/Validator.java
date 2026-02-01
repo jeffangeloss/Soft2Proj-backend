@@ -1,9 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
-import com.app.soft2projbackend.model.Flow;
-import com.app.soft2projbackend.model.Node;
-import com.app.soft2projbackend.model.TipoNodo;
-import com.app.soft2projbackend.model.Connection;
+import com.app.soft2projbackend.exceptions.InvalidStartException;
+import com.app.soft2projbackend.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,7 +20,7 @@ public class Validator {
                 .toList();
 
         if (startNodes.size() != 1) {
-            throw new IllegalStateException("El workflow debe tener exactamente un nodo START.");
+            throw new InvalidStartException();
         }
         // Inicio de la validación de grafo conectado
         checkConnectivity(flow, startNodes.get(0));

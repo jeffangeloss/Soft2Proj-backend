@@ -10,7 +10,8 @@ public class ConditionalNode extends Nodo {
     private Object expectedValue;
 
     public ConditionalNode(String name, String contextKey, String operator, Object expectedValue) {
-        super(name, TipoNodo.CONDITIONAL);
+        this.name = name;
+        this.type = TipoNodo.CONDITIONAL;
         this.contextKey = contextKey;
         this.operator = operator;
         this.expectedValue = expectedValue;

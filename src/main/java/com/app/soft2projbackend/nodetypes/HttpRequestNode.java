@@ -10,7 +10,8 @@ public class HttpRequestNode extends Nodo {
     private String responseKey;
 
     public HttpRequestNode(String name, String method, String url, String responseKey) {
-        super(name, TipoNodo.HTTP_REQUEST);
+        this.name = name;
+        this.type = TipoNodo.HTTP_REQUEST;
         this.method = method;
         this.url = url;
         this.responseKey = responseKey;

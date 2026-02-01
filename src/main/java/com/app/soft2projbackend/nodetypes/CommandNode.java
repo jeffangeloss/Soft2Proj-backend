@@ -1,5 +1,7 @@
 package com.app.soft2projbackend.nodetypes;
 
+import com.app.soft2projbackend.exceptions.InvalidArgumentException;
+import com.app.soft2projbackend.exceptions.InvalidKeyException;
 import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.PoliticaError;
@@ -27,9 +29,25 @@ public class CommandNode extends Node {
     @Override
     public void execute(ExecutionContext context) {
         System.out.println("Command: " + message);
-        if ("SET_VARIABLE".equals(commandType)) {
+        if (key == null) throw new InvalidKeyException();
+        if (value == null) throw new InvalidArgumentException();
+        if ("SET_VARIABLE".equalsIgnoreCase(commandType)) {
             context.put(key, value);
         }
+        if ("LOG".equalsIgnoreCase(commandType)) {
+            System.out.println(key + ": " + value);
+        }
+        if ("INCREMENT".equalsIgnoreCase(commandType)) {
+            Object currentObj = context.get(key);
 
+            if (currentObj == null) {
+                throw new IllegalStateException("Variable not found: " + key);
+            }
+
+            int current = Integer.parseInt(currentObj.toString());
+            int inc = Integer.parseInt(value);
+
+            context.put(key, current + inc);
+        }
     }
 }

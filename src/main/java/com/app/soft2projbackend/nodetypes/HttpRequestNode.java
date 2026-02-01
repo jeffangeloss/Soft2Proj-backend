@@ -8,11 +8,12 @@ import com.app.soft2projbackend.model.TipoNodo;
 public class HttpRequestNode extends Node {
     private String url;
 
-    public HttpRequestNode(String id, String name, PoliticaError politica) {
+    public HttpRequestNode(String id, String name, PoliticaError politica, String message) {
         this.id = id;
         this.name = name;
         this.type = TipoNodo.HTTP_REQUEST;
         this.politica = politica;
+        this.message = message;
     }
 
     @Override

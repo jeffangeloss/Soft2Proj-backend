@@ -8,24 +8,28 @@ import com.app.soft2projbackend.model.TipoNodo;
 import java.util.Map;
 
 public class CommandNode extends Node {
-    private String message;
     private String commandType;
-    private Map<String, Object> params;
+    private String key;
+    private String value;
 
-    public CommandNode(String id, String name, PoliticaError politica) {
+
+    public CommandNode(String id, String name, PoliticaError politica, String message, String commandType, String key, String value) {
         this.id = id;
         this.name = name;
         this.type = TipoNodo.COMMAND;
         this.politica = politica;
+        this.message = message;
+        this.commandType = commandType;
+        this.key = key;
+        this.value = value;
     }
 
     @Override
     public void execute(ExecutionContext context) {
         System.out.println("Command: " + message);
-        context.put("lastCommand", message);
-    }
+        if ("SET_VARIABLE".equals(commandType)) {
+            context.put(key, value);
+        }
 
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

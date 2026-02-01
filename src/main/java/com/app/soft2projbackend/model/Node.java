@@ -19,6 +19,7 @@ public abstract class Node {
     protected String name;
     protected TipoNodo type;
     protected PoliticaError politica;
+    protected String message;
 
     protected Node() {}
 
@@ -38,6 +39,10 @@ public abstract class Node {
         return politica;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -50,8 +55,12 @@ public abstract class Node {
         this.type = type;
     }
 
-    public void setPoliticaError(PoliticaError politica) {
+    public void setPolitica(PoliticaError politica) {
         this.politica = politica;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public abstract void execute(ExecutionContext context) throws Exception;

@@ -8,11 +8,12 @@ import com.app.soft2projbackend.model.TipoNodo;
 public class ConditionalNode extends Node {
     private boolean condition;
 
-    public ConditionalNode(String id, String name, PoliticaError politica) {
+    public ConditionalNode(String id, String name, PoliticaError politica, String message) {
         this.id = id;
         this.name = name;
         this.type = TipoNodo.CONDITIONAL;
         this.politica = politica;
+        this.message = message;
     }
 
     @Override

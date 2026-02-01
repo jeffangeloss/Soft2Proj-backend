@@ -11,6 +11,7 @@ public class StartNode extends Node {
         this.name = name;
         this.type = TipoNodo.START;
         this.politica = politica;
+        this.message = "Workflow Iniciado";
     }
 
     @Override

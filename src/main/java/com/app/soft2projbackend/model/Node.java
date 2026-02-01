@@ -54,8 +54,5 @@ public abstract class Node {
         this.politica = politica;
     }
 
-    /**
-     * Método clave del runtime
-     */
     public abstract void execute(ExecutionContext context) throws Exception;
 }

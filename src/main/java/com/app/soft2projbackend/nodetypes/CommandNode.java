@@ -5,22 +5,20 @@ import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.TipoNodo;
 
 public class CommandNode extends Node {
-    private String command;
-    private String outputKey;
 
-    public CommandNode(String name, String command, String outputKey) {
-        this.name = name;
+    private String message;
+
+    public CommandNode() {
         this.type = TipoNodo.COMMAND;
-        this.command = command;
-        this.outputKey = outputKey;
     }
 
     @Override
-    public void execute(ExecutionContext context) throws Exception {
-        System.out.println("Ejecutando comando: " + command);
+    public void execute(ExecutionContext context) {
+        System.out.println("Command: " + message);
+        context.put("lastCommand", message);
+    }
 
-        // mock
-        String output = "command output";
-        context.put(outputKey, output);
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

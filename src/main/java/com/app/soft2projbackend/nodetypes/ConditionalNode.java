@@ -5,23 +5,18 @@ import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.TipoNodo;
 
 public class ConditionalNode extends Node {
-    private String contextKey;
-    private String operator;
-    private Object expectedValue;
+    private boolean condition;
 
-    public ConditionalNode(String name, String contextKey, String operator, Object expectedValue) {
-        this.name = name;
+    public ConditionalNode() {
         this.type = TipoNodo.CONDITIONAL;
-        this.contextKey = contextKey;
-        this.operator = operator;
-        this.expectedValue = expectedValue;
     }
 
     @Override
     public void execute(ExecutionContext context) {
-        Object actual = context.get(contextKey);
-        boolean result = actual != null && actual.equals(expectedValue);
+        context.put("conditionResult", condition);
+    }
 
-        context.put("conditionResult", result);
+    public void setCondition(boolean condition) {
+        this.condition = condition;
     }
 }

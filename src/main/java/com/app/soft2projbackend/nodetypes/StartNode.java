@@ -12,7 +12,7 @@ public class StartNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        // No hace nada
+        context.put("started", true); //Crea variable de inicio
         System.out.println("Workflow iniciado");
     }
 }

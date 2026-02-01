@@ -33,15 +33,12 @@ public class Controller {
         return engine.run(workflow);
     }
 
-    // Endpoint de verificación de disponibilidad del servicio
+    // Comando ping pong
     @GetMapping("/ping")
     public String ping() {
         return "pong";
     }
 
-    /**
-     * Endpoint de depuración para verificar la carga de clases en tiempo de ejecución.
-     */
     @PostMapping("/debug")
     public ExecutionContext debugWorkflow(@RequestBody Flow flow) {
         System.out.println(flow.getNodes().get(0).getClass());

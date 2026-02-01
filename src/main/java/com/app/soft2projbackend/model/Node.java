@@ -1,6 +1,7 @@
 package com.app.soft2projbackend.model;
 
 import com.app.soft2projbackend.nodetypes.*;
+import com.app.soft2projbackend.steprun.StepRun;
 import com.fasterxml.jackson.annotation.*;
 
 @JsonTypeInfo(
@@ -35,5 +36,5 @@ public abstract class Node {
     public void setPolitica(PoliticaError politica) { this.politica = politica; }
     public void setMessage(String message) { this.message = message; }
 
-    public abstract void execute(ExecutionContext context) throws Exception;
+    public abstract void execute(ExecutionContext context, StepRun stepRun) throws Exception;
 }

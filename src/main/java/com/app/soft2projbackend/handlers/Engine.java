@@ -1,6 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
 import com.app.soft2projbackend.model.*;
+import com.app.soft2projbackend.steprun.StepRun;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,11 @@ public class Engine {
 
         ExecutionContext context = new ExecutionContext();
         Node current = flow.getStartNode();
+        StepRun stepRun = new StepRun(current.getId());
 
         while (current != null) {
             try {
-                current.execute(context);
+                current.execute(context, stepRun);
                 current = getNextNode(flow, current, context);
             } catch (Exception e) {
                 if (current.getErrorPolicy() == PoliticaError.STOP) {

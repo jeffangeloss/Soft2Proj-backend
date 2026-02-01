@@ -9,7 +9,8 @@ public class CommandNode extends Nodo {
     private String outputKey;
 
     public CommandNode(String name, String command, String outputKey) {
-        super(name, TipoNodo.COMMAND);
+        this.name = name;
+        this.type = TipoNodo.COMMAND;
         this.command = command;
         this.outputKey = outputKey;
     }

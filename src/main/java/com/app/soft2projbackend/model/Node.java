@@ -26,12 +26,28 @@ public abstract class Node {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public TipoNodo getType() {
         return type;
     }
 
     public PoliticaError getErrorPolicy() {
         return politica;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(TipoNodo type) {
+        this.type = type;
     }
 
     public void setPoliticaError(PoliticaError politica) {

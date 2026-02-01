@@ -18,7 +18,7 @@ public class Engine {
                 current.execute(context);
                 current = getNextNode(flow, current, context);
             } catch (Exception e) {
-                if (current.getErrorPolicy() == PoliticaError.STOP_ON_FAIL) {
+                if (current.getErrorPolicy() == PoliticaError.STOP) {
                     throw new RuntimeException(e);
                 }
                 current = getNextNode(flow, current, context);

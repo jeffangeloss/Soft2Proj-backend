@@ -40,7 +40,7 @@ public class Flow {
         return name;
     }
 
-    public List<Node> getNodos() {
+    public List<Node> getNodes() {
         return nodes;
     }
 

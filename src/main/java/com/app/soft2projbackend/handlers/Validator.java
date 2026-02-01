@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class Validator {
 
+    /**
+     * Valida los requisitos mínimos de estructura: un solo inicio y conectividad total.
+     */
     public void validate(Flow flow) {
+        // Verificación de existencia de un único nodo de inicio
         List<Node> startNodes = flow.getNodes().stream()
                 .filter(n -> n.getType() == TipoNodo.START)
                 .toList();
@@ -20,9 +24,13 @@ public class Validator {
         if (startNodes.size() != 1) {
             throw new IllegalStateException("El workflow debe tener exactamente un nodo START.");
         }
+        // Inicio de la validación de grafo conectado
         checkConnectivity(flow, startNodes.get(0));
     }
 
+    /**
+     * Algoritmo BFS para asegurar que no existan nodos inalcanzables o aislados.
+     */
     private void checkConnectivity(Flow flow, Node startNode) {
         Set<String> visitedIds = new HashSet<>();
         Queue<String> queue = new LinkedList<>();
@@ -43,6 +51,7 @@ public class Validator {
             }
         }
 
+        // Garantiza que el flujo enviado sea un solo bloque de trabajo conectado
         if (visitedIds.size() < flow.getNodes().size()) {
             List<String> allIds = flow.getNodes().stream().map(Node::getId).collect(Collectors.toList());
             allIds.removeAll(visitedIds);

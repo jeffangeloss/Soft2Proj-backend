@@ -3,8 +3,6 @@ package com.app.soft2projbackend.model;
 import com.app.soft2projbackend.nodetypes.*;
 import com.fasterxml.jackson.annotation.*;
 
-import java.util.UUID;
-
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -19,22 +17,17 @@ import java.util.UUID;
 public abstract class Nodo {
     protected String id;
     protected String name;
-    protected TipoNodo tipo;
+    protected TipoNodo type;
     protected PoliticaError politica;
 
-    protected Nodo(String name, TipoNodo type) {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
-        this.tipo = type;
-        this.politica = PoliticaError.STOP_ON_FAIL;
-    }
+    protected Nodo() {}
 
     public String getId() {
         return id;
     }
 
     public TipoNodo getType() {
-        return tipo;
+        return type;
     }
 
     public PoliticaError getErrorPolicy() {

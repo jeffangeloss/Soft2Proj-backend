@@ -35,8 +35,5 @@ public abstract class Node {
     public void setPolitica(PoliticaError politica) { this.politica = politica; }
     public void setMessage(String message) { this.message = message; }
 
-    /**
-     * Definición del contrato de ejecución que cada nodo concreto debe implementar.
-     */
     public abstract void execute(ExecutionContext context) throws Exception;
 }

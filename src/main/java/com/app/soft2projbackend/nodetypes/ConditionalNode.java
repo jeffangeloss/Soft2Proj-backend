@@ -18,7 +18,7 @@ public class ConditionalNode extends Node {
     }
 
     @Override
-    public void execute(ExecutionContext context, StepRun stepRun) {
+    public void execute(ExecutionContext context) {
         context.put("conditionResult", condition);
     }
 

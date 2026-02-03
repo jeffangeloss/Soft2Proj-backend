@@ -41,7 +41,7 @@ public class Controller {
 
     @PostMapping("/debug")
     public ExecutionContext debugWorkflow(@RequestBody Flow flow) {
-        System.out.println(flow.getNodes().get(0).getClass());
+        System.out.println(flow.getNodes().getFirst().getClass());
         return engine.run(flow);
     }
 

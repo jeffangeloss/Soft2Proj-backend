@@ -27,7 +27,7 @@ public class CommandNode extends Node {
     private String outputKey;
 
 
-    public CommandNode(String id, String name, PoliticaError politica, String message, String commandType, String key, String value) {
+    public CommandNode(String id, String name, PoliticaError politica, String message, String commandType, String key, String value, String command) {
         this.id = id;
         this.name = name;
         this.type = TipoNodo.COMMAND;
@@ -36,6 +36,7 @@ public class CommandNode extends Node {
         this.commandType = commandType;
         this.key = key;
         this.value = value;
+        this.command = command;
     }
 
     @Override

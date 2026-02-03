@@ -17,7 +17,7 @@ public class Engine {
 
         while (current != null) {
             try {
-                current.execute(context, stepRun);
+                current.execute(context);
                 current = getNextNode(flow, current, context);
             } catch (Exception e) {
                 if (current.getErrorPolicy() == PoliticaError.STOP) {

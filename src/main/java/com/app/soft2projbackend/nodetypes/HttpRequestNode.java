@@ -4,7 +4,6 @@ import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.PoliticaError;
 import com.app.soft2projbackend.model.TipoNodo;
-import com.app.soft2projbackend.steprun.StepRun;
 
 public class HttpRequestNode extends Node {
     private String url;
@@ -18,7 +17,7 @@ public class HttpRequestNode extends Node {
     }
 
     @Override
-    public void execute(ExecutionContext context, StepRun stepRun) throws Exception {
+    public void execute(ExecutionContext context) throws Exception {
         System.out.println("Calling URL: " + url);
 
         int statusCode = 200; // simulado

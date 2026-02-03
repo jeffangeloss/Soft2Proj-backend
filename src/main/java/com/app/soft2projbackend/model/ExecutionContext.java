@@ -1,5 +1,7 @@
 package com.app.soft2projbackend.model;
 
+import com.app.soft2projbackend.steprun.StepRun;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,9 @@ public class ExecutionContext {
         variables.stream()
                 .filter(v -> v.getKey().equals(key))
                 .findFirst()
-                .ifPresentOrElse(v -> v.setValue(value),
+                .ifPresentOrElse(v -> {
+                            v.setValue(value);
+                        },
                         () -> variables.add(new Variable(key, value))
                 );
     }

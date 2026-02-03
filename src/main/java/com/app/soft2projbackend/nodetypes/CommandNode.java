@@ -39,19 +39,20 @@ public class CommandNode extends Node {
     }
 
     @Override
-    public void execute(ExecutionContext context, StepRun stepRun) {
-        stepRun.markStart();
+    public void execute(ExecutionContext context) {
+        StepRun reloj = new StepRun(this.id);
+        reloj.markStart();
 
         System.out.println("Command: " + message);
         if (key == null) throw new InvalidKeyException();
         if (value == null) throw new InvalidArgumentException();
         if ("SET_VARIABLE".equalsIgnoreCase(commandType)) {
             context.put(key, value);
-            stepRun.setOutput("Variable '" + key + "' set");
+            reloj.setOutput("Variable '" + key + "' set");
         }
         if ("LOG".equalsIgnoreCase(commandType)) {
             System.out.println(key + ": " + value);
-            stepRun.setOutput(String.valueOf(key));
+            reloj.setOutput(String.valueOf(key));
         }
         if ("INCREMENT".equalsIgnoreCase(commandType)) {
             Object currentObj = context.get(key);
@@ -64,11 +65,11 @@ public class CommandNode extends Node {
             int inc = Integer.parseInt(value);
 
             context.put(key, current + inc);
-            stepRun.setOutput("Incremented to " + inc);
+            reloj.setOutput("Incremented to " + inc);
         }
         if("EXECUTE".equalsIgnoreCase(commandType)){
             try {
-                executeSystemCommand(context,stepRun);
+                executeSystemCommand(context,reloj);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -109,7 +110,7 @@ public class CommandNode extends Node {
         String stdout = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         String stderr = new String(process.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
 
-        stepRun.setOutput(stdout);
+        stepRun.setOutput(stdout); // set output en la variable
 
         if (outputKey != null) {
             context.put(outputKey, stdout);

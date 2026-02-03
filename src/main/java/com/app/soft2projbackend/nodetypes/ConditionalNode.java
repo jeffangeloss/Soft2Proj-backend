@@ -4,7 +4,6 @@ import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.PoliticaError;
 import com.app.soft2projbackend.model.TipoNodo;
-import com.app.soft2projbackend.steprun.StepRun;
 
 public class ConditionalNode extends Node {
     private boolean condition;
@@ -18,7 +17,7 @@ public class ConditionalNode extends Node {
     }
 
     @Override
-    public void execute(ExecutionContext context, StepRun stepRun) {
+    public void execute(ExecutionContext context) {
         context.put("conditionResult", condition);
     }
 

@@ -9,6 +9,10 @@ public class ExecutionContext {
 
     private List<Variable> variables = new ArrayList<>();
 
+    public List<Variable> getVariableList() {
+        return variables;
+    }
+
     public void put(String key, Object value) {
         variables.stream()
                 .filter(v -> v.getKey().equals(key))
@@ -26,9 +30,5 @@ public class ExecutionContext {
                 .map(Variable::getValue)
                 .findFirst()
                 .orElse(null);
-    }
-
-    public List<Variable> getAll() {
-        return variables;
     }
 }

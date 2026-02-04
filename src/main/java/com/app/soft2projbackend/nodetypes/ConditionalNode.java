@@ -8,18 +8,22 @@ import com.app.soft2projbackend.model.TipoNodo;
 public class ConditionalNode extends Node {
     private boolean condition;
 
-    public ConditionalNode(String id, String name, PoliticaError politica, String message, boolean condition) {
-        this.id = id;
-        this.name = name;
-        this.type = TipoNodo.CONDITIONAL;
-        this.politica = politica;
-        this.message = message;
+    public boolean isCondition() {
+        return condition;
+    }
+
+    public void setCondition(boolean condition) {
         this.condition = condition;
+    }
+
+    public ConditionalNode() {
+        this.type = TipoNodo.CONDITIONAL;
+        this.politica = PoliticaError.STOP_ON_FAIL;
     }
 
     @Override
     public void execute(ExecutionContext context) {
-        context.put("conditionResult", condition);
+        context.put("conditionResult", condition); // put mou os code op
     }
 
     public boolean getCondition() {

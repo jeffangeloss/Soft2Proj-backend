@@ -1,30 +1,74 @@
 package com.app.soft2projbackend.nodetypes;
 
-import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Node;
-import com.app.soft2projbackend.model.PoliticaError;
-import com.app.soft2projbackend.model.TipoNodo;
+import com.app.soft2projbackend.exceptions.InvalidArgumentException;
+import com.app.soft2projbackend.model.*;
+import tools.jackson.databind.*;
+
+import java.net.URI;
+import java.net.http.*;
 
 public class HttpRequestNode extends Node {
-    private String url;
+    private String url = "https://script.google.com/macros/s/AKfycbyM6p40ois-vNNIbSBBXCcagOxi2Zp4NR6NKXUBYfaXg4HdFZR5XIAxXLhEr4Txg3goQg/exec";
+    private String inputKey;   // ej: "gameId"
 
-    public HttpRequestNode(String id, String name, PoliticaError politica, String message) {
+    public HttpRequestNode(String id, String name, String inputKey) {
         this.id = id;
         this.name = name;
         this.type = TipoNodo.HTTP_REQUEST;
-        this.politica = politica;
-        this.message = message;
+        this.politica = PoliticaError.CONTINUE_ON_FAIL;
+        this.message = "Obten la descripcion de tu juego";
+        this.inputKey = inputKey;
+    }
+
+    public void getUrl(String url) {
+        this.url = url;
+    }
+
+    // setters usados por Jackson
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setInputKey(String inputKey) {
+        this.inputKey = inputKey;
     }
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
-        System.out.println("Calling URL: " + url);
+        // Chek key au
+        if (inputKey == null) {
+            throw new InvalidArgumentException();
+        }
 
-        int statusCode = 200; // simulado
-        context.put("httpStatus", statusCode);
-    }
+        // HTTP kolplei
+        HttpClient client = HttpClient.newHttpClient();
 
-    public void setUrl(String url) {
-        this.url = url;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // breik Json daun
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode gameList = mapper.readTree(response.body());
+
+        // lufa pleiplei au
+        String description = null;
+
+        for (JsonNode game : gameList) {
+            if (game.get("nombre").asString().equals(inputKey)) {
+                description = game.get("descripcion").asString();
+                break;
+            }
+        }
+
+        if (description == null) {
+            throw new InvalidArgumentException();
+        }
+
+        // Kep em klin
+        context.put("gameDescription" + id, description);
     }
 }

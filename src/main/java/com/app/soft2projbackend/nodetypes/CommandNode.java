@@ -23,20 +23,44 @@ public class CommandNode extends Node {
     private List<String> arguments;
     private Map<String, String> environment;
     private String workingDirectory;
-    private long timeout = 5000;
     private String outputKey;
 
 
-    public CommandNode(String id, String name, PoliticaError politica, String message, String commandType, String key, String value, String command) {
-        this.id = id;
-        this.name = name;
+    public CommandNode() {
         this.type = TipoNodo.COMMAND;
-        this.politica = politica;
-        this.message = message;
+        this.politica = PoliticaError.CONTINUE_ON_FAIL;
+    }
+
+    public void setCommandType(String commandType) {
         this.commandType = commandType;
+    }
+
+    public void setKey(String key) {
         this.key = key;
+    }
+
+    public void setValue(String value) {
         this.value = value;
+    }
+
+    public void setCommand(String command) {
         this.command = command;
+    }
+
+    public void setArguments(List<String> arguments) {
+        this.arguments = arguments;
+    }
+
+    public void setEnvironment(Map<String, String> environment) {
+        this.environment = environment;
+    }
+
+    public void setWorkingDirectory(String workingDirectory) {
+        this.workingDirectory = workingDirectory;
+    }
+
+    public void setOutputKey(String outputKey) {
+        this.outputKey = outputKey;
     }
 
     @Override
@@ -88,6 +112,7 @@ public class CommandNode extends Node {
 
         Process process = pb.start();
 
+        long timeout = 5000;
         boolean finished = process.waitFor(timeout, TimeUnit.MILLISECONDS);
         if (!finished) {
             process.destroyForcibly();

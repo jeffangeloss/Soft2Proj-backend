@@ -11,13 +11,10 @@ public class HttpRequestNode extends Node {
     private String url = "https://script.google.com/macros/s/AKfycbyM6p40ois-vNNIbSBBXCcagOxi2Zp4NR6NKXUBYfaXg4HdFZR5XIAxXLhEr4Txg3goQg/exec";
     private String inputKey;   // ej: "gameId"
 
-    public HttpRequestNode(String id, String name, String inputKey) {
-        this.id = id;
-        this.name = name;
+    public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
         this.message = "Obten la descripcion de tu juego";
-        this.inputKey = inputKey;
     }
 
     public void getUrl(String url) {

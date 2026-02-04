@@ -6,11 +6,9 @@ import com.app.soft2projbackend.model.PoliticaError;
 import com.app.soft2projbackend.model.TipoNodo;
 
 public class StartNode extends Node {
-    public StartNode(String id, String name, PoliticaError politica) {
-        this.id = id;
-        this.name = name;
+    public StartNode() {
         this.type = TipoNodo.START;
-        this.politica = politica;
+        this.politica = PoliticaError.CONTINUE_ON_FAIL;
         this.message = "Workflow Iniciado";
     }
 

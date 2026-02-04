@@ -33,7 +33,7 @@ public class Controller {
         return engine.run(workflow);
     }
 
-    // Comando ping pong
+    // Command ping pong
     @GetMapping("/ping")
     public String ping() {
         return "pong";

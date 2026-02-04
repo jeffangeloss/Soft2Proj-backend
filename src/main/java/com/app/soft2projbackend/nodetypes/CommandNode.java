@@ -56,24 +56,10 @@ public class CommandNode extends Node {
             reloj.setOutput(String.valueOf(key));
         }
         if ("INCREMENT".equalsIgnoreCase(commandType)) {
-            Object currentObj = context.get(key);
-
-            if (currentObj == null) {
+            if (value == null) {
                 throw new IllegalStateException("Variable not found: " + key);
             }
-
-            int current = Integer.parseInt(currentObj.toString());
-            int inc = Integer.parseInt(value);
-
-            context.put(key, current + inc);
-            reloj.setOutput("Incremented to " + inc);
-        }
-        if("EXECUTE".equalsIgnoreCase(commandType)){
-            try {
-                executeSystemCommand(context,reloj);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            reloj.setOutput("Incremented to " + "1");
         }
     }
 

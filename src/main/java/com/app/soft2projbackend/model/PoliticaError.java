@@ -1,6 +1,6 @@
 package com.app.soft2projbackend.model;
 
 public enum PoliticaError {
-    STOP,
-    CONTINUE
+    STOP_ON_FAIL,
+    CONTINUE_ON_FAIL
 }

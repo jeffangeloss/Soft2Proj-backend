@@ -77,18 +77,22 @@ public class CommandNode extends Node {
         if ("SQUARE".equalsIgnoreCase(commandType)) {
             long expoFunc = MathFunctions.square(value);
             context.put(key, expoFunc);
+            reloj.setOutput("Variable: " + key + " set");
         }
         if ("FACTORIAL".equalsIgnoreCase(commandType)) {
             long expoFunc = MathFunctions.factorial(value);
             context.put(key, expoFunc);
+            reloj.setOutput("Variable: " + key + " set");
         }
         if ("EXPONENTIAL".equalsIgnoreCase(commandType)) {
             long expoFunc = MathFunctions.expo(value);
             context.put(key, expoFunc);
+            reloj.setOutput("Variable: " + key + " set");
         }
         if ("ADD".equalsIgnoreCase(commandType)) {
             long expoFunc = MathFunctions.add(value);
             context.put(key, expoFunc);
+            reloj.setOutput("Variable: " + key + " set");
         }
     }
 /*

@@ -24,6 +24,7 @@ public class Controller {
      */
     @PostMapping("/run")
     public ExecutionContext runWorkflow(@RequestBody Flow workflow) {
+        workflow.resolveConnections();
         validator.validate(workflow);
         return engine.run(workflow);
     }

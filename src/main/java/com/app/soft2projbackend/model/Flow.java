@@ -18,7 +18,7 @@ public class Flow {
      */
     public List<Connection> getConnectionsFrom(String nodeId) {
         return connections.stream()
-                .filter(c -> c.getFromNodeId().equals(nodeId))
+                .filter(c -> c.getFromNode().getId().equals(nodeId))
                 .toList();
     }
 

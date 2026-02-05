@@ -25,11 +25,7 @@ public class Controller {
      */
     @PostMapping("/run")
     public ExecutionContext runWorkflow(@RequestBody Flow workflow) {
-
-        // Fase de validación de reglas de negocio y estructura de datos
         validator.validate(workflow);
-
-        // Fase de procesamiento y ejecución del motor
         return engine.run(workflow);
     }
 

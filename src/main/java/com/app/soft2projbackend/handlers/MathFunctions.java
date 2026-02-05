@@ -1,7 +1,7 @@
 package com.app.soft2projbackend.handlers;
 
 public class MathFunctions {
-    public static int square(int x) {
+    public static long square(int x) {
         int result = x * x;
         System.out.println("square result: " + result);
         return result;
@@ -33,7 +33,7 @@ public class MathFunctions {
         return result;
     }
 
-    public static int add(int num) {
+    public static long add(int num) {
         int result = num + 10;
         System.out.println("add result: " + result);
         return result;

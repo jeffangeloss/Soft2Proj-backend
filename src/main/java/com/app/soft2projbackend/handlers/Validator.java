@@ -31,20 +31,20 @@ public class Validator {
      */
     private void checkConnectivity(Flow flow, Node startNode) {
         Set<String> visitedIds = new HashSet<>();
-        Queue<String> queue = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
 
-        queue.add(startNode.getId());
+        queue.add(startNode);
         visitedIds.add(startNode.getId());
 
         while (!queue.isEmpty()) {
-            String currentId = queue.poll();
-            List<Connection> connections = flow.getConnectionsFrom(currentId);
+            Node current = queue.poll();
+            List<Connection> connections = flow.getConnectionsFrom(current.getId());
 
             for (Connection conn : connections) {
-                String toId = conn.getToNodeId();
-                if (!visitedIds.contains(toId)) {
-                    visitedIds.add(toId);
-                    queue.add(toId);
+                Node toNode = conn.getToNode();
+                if (!visitedIds.contains(toNode.getId())) {
+                    visitedIds.add(toNode.getId());
+                    queue.add(toNode);
                 }
             }
         }

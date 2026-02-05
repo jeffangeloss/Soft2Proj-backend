@@ -26,14 +26,11 @@ public class CommandNode extends Node {
     public CommandNode() {
         this.type = TipoNodo.COMMAND;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
+        this.key = "operation" + id;
     }
 
     public void setCommandType(String commandType) {
         this.commandType = commandType;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public void setValue(int value) {

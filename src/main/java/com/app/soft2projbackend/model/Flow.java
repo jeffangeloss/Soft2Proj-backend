@@ -19,6 +19,13 @@ public class Flow {
                 .toList();
     }
 
+    public void resolveConnections() {
+        if (connections == null) return;
+        for (Connection c : connections) {
+            c.resolve(this);
+        }
+    }
+
     // Setters sincronizados con las llaves del JSON enviado desde el cliente
     public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }

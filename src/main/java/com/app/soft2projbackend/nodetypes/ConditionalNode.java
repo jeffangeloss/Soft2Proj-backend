@@ -23,6 +23,6 @@ public class ConditionalNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        context.put("condition" + id, condition); // put mou os code op
+        context.put("condition" + id, condition); // put condition op gon EC
     }
 }

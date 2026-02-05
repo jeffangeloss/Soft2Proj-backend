@@ -1,9 +1,6 @@
 package com.app.soft2projbackend.nodetypes;
 
-import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Node;
-import com.app.soft2projbackend.model.PoliticaError;
-import com.app.soft2projbackend.model.TipoNodo;
+import com.app.soft2projbackend.model.*;
 
 public class StartNode extends Node {
     public StartNode() {

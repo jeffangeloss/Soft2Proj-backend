@@ -1,19 +1,13 @@
 package com.app.soft2projbackend.nodetypes;
 
-import com.app.soft2projbackend.exceptions.InvalidArgumentException;
-import com.app.soft2projbackend.exceptions.InvalidKeyException;
-import com.app.soft2projbackend.handlers.MathFunctions;
-import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Node;
-import com.app.soft2projbackend.model.PoliticaError;
-import com.app.soft2projbackend.model.TipoNodo;
+import com.app.soft2projbackend.exceptions.*;
+import com.app.soft2projbackend.handlers.*;
+import com.app.soft2projbackend.model.*;
 import com.app.soft2projbackend.steprun.StepRun;
+import java.util.*;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class CommandNode extends Node {

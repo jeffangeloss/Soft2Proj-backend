@@ -2,9 +2,6 @@ package com.app.soft2projbackend.model;
 
 import java.util.*;
 
-/**
- * Representa la topología completa de un workflow, incluyendo sus nodos y aristas (conexiones).
- */
 public class Flow {
     private String id;
     private String name;
@@ -33,9 +30,6 @@ public class Flow {
     public List<Node> getNodes() { return nodes; }
     public List<Connection> getConnections() { return connections; }
 
-    /**
-     * Busca el nodo de entrada principal para iniciar la ejecución del motor.
-     */
     public Node getStartNode() {
         return nodes.stream()
                 .filter(n -> n.getType() == TipoNodo.START)
@@ -43,9 +37,7 @@ public class Flow {
                 .orElseThrow();
     }
 
-    /**
-     * Recupera un nodo específico por su identificador único dentro del grafo.
-     */
+    //Recupera un nodo específico por su identificador único dentro del grafo.
     public Node getNodeById(String id) {
         return nodes.stream()
                 .filter(n -> n.getId().equals(id))

@@ -2,6 +2,7 @@ package com.app.soft2projbackend.nodetypes;
 
 import com.app.soft2projbackend.exceptions.InvalidArgumentException;
 import com.app.soft2projbackend.exceptions.InvalidKeyException;
+import com.app.soft2projbackend.handlers.MathFunctions;
 import com.app.soft2projbackend.model.ExecutionContext;
 import com.app.soft2projbackend.model.Node;
 import com.app.soft2projbackend.model.PoliticaError;
@@ -18,13 +19,15 @@ import java.util.concurrent.TimeUnit;
 public class CommandNode extends Node {
     private String commandType;
     private String key;
-    private String value;
+    private int value;
+
+    /*
     private String command;
     private List<String> arguments;
     private Map<String, String> environment;
     private String workingDirectory;
     private String outputKey;
-
+    */
 
     public CommandNode() {
         this.type = TipoNodo.COMMAND;
@@ -39,10 +42,10 @@ public class CommandNode extends Node {
         this.key = key;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
-
+/*
     public void setCommand(String command) {
         this.command = command;
     }
@@ -62,6 +65,7 @@ public class CommandNode extends Node {
     public void setOutputKey(String outputKey) {
         this.outputKey = outputKey;
     }
+*/
 
     @Override
     public void execute(ExecutionContext context) {
@@ -70,23 +74,24 @@ public class CommandNode extends Node {
 
         System.out.println("Command: " + message);
         if (key == null) throw new InvalidKeyException();
-        if (value == null) throw new InvalidArgumentException();
-        if ("SET_VARIABLE".equalsIgnoreCase(commandType)) {
-            context.put(key, value);
-            reloj.setOutput("Variable '" + key + "' set");
+        if ("SQUARE".equalsIgnoreCase(commandType)) {
+            long expoFunc = MathFunctions.square(value);
+            context.put(key, expoFunc);
         }
-        if ("LOG".equalsIgnoreCase(commandType)) {
-            System.out.println(key + ": " + value);
-            reloj.setOutput(String.valueOf(key));
+        if ("FACTORIAL".equalsIgnoreCase(commandType)) {
+            long expoFunc = MathFunctions.factorial(value);
+            context.put(key, expoFunc);
         }
-        if ("INCREMENT".equalsIgnoreCase(commandType)) {
-            if (value == null) {
-                throw new IllegalStateException("Variable not found: " + key);
-            }
-            reloj.setOutput("Incremented to " + "1");
+        if ("EXPONENTIAL".equalsIgnoreCase(commandType)) {
+            long expoFunc = MathFunctions.expo(value);
+            context.put(key, expoFunc);
+        }
+        if ("ADD".equalsIgnoreCase(commandType)) {
+            long expoFunc = MathFunctions.add(value);
+            context.put(key, expoFunc);
         }
     }
-
+/*
     private void executeSystemCommand(ExecutionContext context, StepRun stepRun)
             throws Exception {
 
@@ -131,5 +136,5 @@ public class CommandNode extends Node {
         if (process.exitValue() != 0) {
             throw new RuntimeException(stderr.isBlank() ? "Command failed" : stderr);
         }
-    }
+    } */
 }

@@ -6,7 +6,6 @@ public class StartNode extends Node {
     public StartNode() {
         this.type = TipoNodo.START;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
-        this.message = "Workflow Iniciado";
     }
 
     @Override

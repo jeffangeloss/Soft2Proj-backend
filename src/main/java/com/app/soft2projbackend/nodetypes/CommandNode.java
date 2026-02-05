@@ -63,7 +63,7 @@ public class CommandNode extends Node {
         StepRun reloj = new StepRun(this.id);
         reloj.markStart();
 
-        System.out.println("Command: " + message);
+        System.out.println("Command: " + commandType);
         if (key == null) throw new InvalidKeyException();
         if ("SQUARE".equalsIgnoreCase(commandType)) {
             long expoFunc = MathFunctions.square(value);

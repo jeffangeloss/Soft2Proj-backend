@@ -14,7 +14,6 @@ public class HttpRequestNode extends Node {
     public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
-        this.message = "Obten la descripcion de tu juego";
     }
 
     public void getUrl(String url) {

@@ -19,7 +19,6 @@ public abstract class Node {
     protected String name;
     protected TipoNodo type;
     protected PoliticaError politica;
-    protected String message;
 
     protected Node() {} // Constructor vacío necesario
 
@@ -27,13 +26,11 @@ public abstract class Node {
     public String getName() { return name; }
     public TipoNodo getType() { return type; }
     public PoliticaError getErrorPolicy() { return politica; }
-    public String getMessage() { return message; }
 
     public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setType(TipoNodo type) { this.type = type; }
     public void setPolitica(PoliticaError politica) { this.politica = politica; }
-    public void setMessage(String message) { this.message = message; }
 
     public abstract void execute(ExecutionContext context) throws Exception;
 }

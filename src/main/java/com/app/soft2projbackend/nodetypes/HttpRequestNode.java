@@ -50,7 +50,20 @@ public class HttpRequestNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
-        // Kep em klin
-        context.put("gameDescription" + id, 1);
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<Void> response =
+                client.send(request, HttpResponse.BodyHandlers.discarding());
+
+        boolean success = response.statusCode() == 200;
+
+        // Guardar el resultado en el contexto
+        context.put("httpAtt", success);
     }
 }

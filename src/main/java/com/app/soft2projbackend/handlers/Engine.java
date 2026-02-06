@@ -1,6 +1,8 @@
 package com.app.soft2projbackend.handlers;
 
 import java.util.List;
+
+import com.app.soft2projbackend.exceptions.MultipleConnectionsException;
 import org.springframework.stereotype.Service;
 import com.app.soft2projbackend.model.*;
 import com.app.soft2projbackend.nodetypes.ConditionalNode;
@@ -11,6 +13,7 @@ public class Engine {
     public ExecutionContext run(Flow flow) {
 
         ExecutionContext context = new ExecutionContext();
+        context.setFlow(flow);
         Node current = flow.getStartNode();
 
         while (current != null) {

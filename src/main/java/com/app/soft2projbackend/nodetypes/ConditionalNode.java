@@ -1,6 +1,10 @@
 package com.app.soft2projbackend.nodetypes;
 
+import com.app.soft2projbackend.exceptions.MultipleConnectionsException;
 import com.app.soft2projbackend.model.*;
+
+import java.util.List;
+
 public class ConditionalNode extends Node {
     private boolean condition;
 
@@ -19,6 +23,22 @@ public class ConditionalNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        context.put("condition" + id, condition); // put condition op gon EC
+        Object lastValue = context.get("conditionResult");
+        Node prev = getPrevNode(context.getFlow(),this,context);
+        Variable val = context.getVariableList()
+                .stream()
+                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ prev.getId()))
+                .findFirst()
+                .orElse(null);
+        assert val != null;
+        boolean way = (boolean) val.getValue();
+
+        context.put("conditionResult", way);
+    }
+
+    private Node getPrevNode(Flow flow, Node current, ExecutionContext context) {
+        List<Connection> outs = flow.getConnectionsTo(current);
+        if (outs.size() > 1) throw new MultipleConnectionsException();
+        return outs.getFirst().getFromNode();// List of Node connections
     }
 }

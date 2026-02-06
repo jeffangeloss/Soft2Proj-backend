@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExecutionContext {
-
+    private Flow flow;
     private List<Variable> variables = new ArrayList<>();
 
+    public void setFlow(Flow flow) {
+        this.flow = flow;
+    }
+    public Flow getFlow() {
+        return flow;
+    }
     public List<Variable> getVariableList() {
         return variables;
     }

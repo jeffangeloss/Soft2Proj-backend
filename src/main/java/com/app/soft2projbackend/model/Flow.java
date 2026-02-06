@@ -21,6 +21,14 @@ public class Flow {
         return connectedNodes;
     }
 
+    public List<Connection> getConnectionsTo(Node node) {
+        List<Connection> connectedNodes = connections.stream()
+                .filter(c -> c.getToNode().equals(node))
+                .toList();
+        System.out.println(connectedNodes);
+        return connectedNodes;
+    }
+
     public void resolveConnections() {
         if (connections == null) return;
         for (Connection c : connections) {

@@ -33,12 +33,12 @@ public class Engine {
 
         if (current.getType() == TipoNodo.CONDITIONAL) {
             Boolean way = ((ConditionalNode) current).isCondition();
+            System.out.println(way);
             Connection selConn =  outs.stream()
                     .filter(c -> c.isCondition(way))
                     .findFirst()
                     .orElse(null);
-            assert selConn != null;
-            System.out.println(selConn.getToNodeId());
+            System.out.println(selConn);
             return selConn.getToNode();
         }
 

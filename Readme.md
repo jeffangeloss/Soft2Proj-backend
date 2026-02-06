@@ -47,6 +47,9 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 1.  Localiza la clase principal del proyecto dentro de la estructura de paquetes.
 2.  Ejecuta la aplicación (Run).
 3.  Confirma que el servidor está activo verificando que el log indique el inicio en el puerto **8080**.
+4. Si se va a probar el backend y frontend en distintas PCs, se debe configurar la ip en la clase controller
+5. Si se va a probar el backend y frontend en la misma PC, solo va a escuchar en localhost:8080
+6. En ambos escenarios la direccion url tendrá la siguiente forma "http://ipAddress:8080/api/workflows/run", cambiar ipAdress por "localhost" o por la ip configurada
 
 ---
 

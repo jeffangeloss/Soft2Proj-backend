@@ -13,10 +13,12 @@ public class Flow {
     /**
      * Filtra y retorna todas las conexiones salientes de un nodo específico.
      */
-    public List<Connection> getConnectionsFrom(String nodeId) {
-        return connections.stream()
-                .filter(c -> c.getFromNode().getId().equals(nodeId))
+    public List<Connection> getConnectionsFrom(Node node) {
+        List<Connection> connectedNodes = connections.stream()
+                .filter(c -> c.getFromNode().equals(node))
                 .toList();
+        System.out.println(connectedNodes);
+        return connectedNodes;
     }
 
     public void resolveConnections() {

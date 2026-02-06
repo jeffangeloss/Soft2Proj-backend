@@ -9,12 +9,12 @@ public class ConditionalNode extends Node {
         this.politica = PoliticaError.STOP_ON_FAIL;
     }
 
-    public boolean isCondition() {
-        return condition;
-    }
-
     public void setCondition(boolean condition) {
         this.condition = condition;
+    }
+
+    public boolean isCondition() {
+        return condition;
     }
 
     @Override

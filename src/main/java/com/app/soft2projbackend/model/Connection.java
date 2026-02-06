@@ -36,7 +36,7 @@ public class Connection {
         return toNodeId;
     }
 
-    public Boolean getCondition() {
+    public Boolean isCondition() {
         return condition;
     }
 

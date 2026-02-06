@@ -9,7 +9,8 @@ import java.net.http.*;
 
 public class HttpRequestNode extends Node {
     private String url = "https://script.google.com/macros/s/AKfycbyM6p40ois-vNNIbSBBXCcagOxi2Zp4NR6NKXUBYfaXg4HdFZR5XIAxXLhEr4Txg3goQg/exec";
-    private String inputKey;   // ej: "gameId"
+    private String method;
+    private PoliticaError politica;
 
     public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
@@ -24,43 +25,20 @@ public class HttpRequestNode extends Node {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    public void setInputKey(String inputKey) {
-        this.inputKey = inputKey;
+    public void setInputKey(String method) {
+        this.method = method;
+    }
+    public void setPolitica(String politica) {
+        switch (politica) {
+            case "STOP" -> this.politica = PoliticaError.STOP_ON_FAIL;
+            case "CONTINUE" -> this.politica = PoliticaError.CONTINUE_ON_FAIL;
+            default -> this.politica = PoliticaError.STOP_ON_FAIL;
+        }
     }
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
-        // Chek key au
-        if (inputKey == null) {
-            throw new InvalidArgumentException();
-        }
-
-        // HTTP kolplei
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        // breik Json daun
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode gameList = mapper.readTree(response.body());
-
-        // lufa pleiplei au
-        String description = null;
-
-        for (JsonNode game : gameList) {
-            if (game.get("nombre").asString().equals(inputKey)) {
-                description = game.get("descripcion").asString();
-                break;
-            }
-        }
-
         // Kep em klin
-        context.put("gameDescription" + id, description);
+        context.put("gameDescription" + id, 1);
     }
 }

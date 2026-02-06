@@ -38,6 +38,11 @@ public class Engine {
         });
         System.out.println("------------------------");
 
+        if (outs.isEmpty()) {
+            context.setFlow(null);
+            return null;
+        }
+
         if (current.getType() == TipoNodo.CONDITIONAL) {
             boolean way = ((ConditionalNode) current).isCondition();
             System.out.println(way);
@@ -49,6 +54,6 @@ public class Engine {
             return selConn.getToNode();
         }
 
-        return outs.isEmpty() ? null : outs.getFirst().getToNode();
+        return outs.getFirst().getToNode();
     }
 }

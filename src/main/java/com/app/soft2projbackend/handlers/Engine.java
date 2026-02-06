@@ -39,7 +39,7 @@ public class Engine {
         System.out.println("------------------------");
 
         if (outs.isEmpty()) {
-            context.setFlow(null);
+            context.setFlow(null); // borrar flow del Execution Context al terminar de recorrer los nodos
             return null;
         }
 

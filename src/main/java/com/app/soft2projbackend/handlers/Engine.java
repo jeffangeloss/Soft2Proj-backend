@@ -39,6 +39,7 @@ public class Engine {
             boolean way = ((ConditionalNode) current).isCondition();
             System.out.println(way);
             Connection selConn = outs.stream()
+                    
                     .filter(c -> c.isCondition() == way)
                     .findFirst()
                     .orElse(null);

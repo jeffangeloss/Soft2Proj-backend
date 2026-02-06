@@ -26,7 +26,6 @@ public class CommandNode extends Node {
     public CommandNode() {
         this.type = TipoNodo.COMMAND;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
-        this.key = "operation" + id;
     }
 
     public void setCommandType(String commandType) {
@@ -57,6 +56,12 @@ public class CommandNode extends Node {
         this.outputKey = outputKey;
     }
 */
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+        this.key = "operation" + id;
+    }
 
     @Override
     public void execute(ExecutionContext context) {

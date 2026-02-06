@@ -60,10 +60,6 @@ public class HttpRequestNode extends Node {
             }
         }
 
-        if (description == null) {
-            throw new InvalidArgumentException();
-        }
-
         // Kep em klin
         context.put("gameDescription" + id, description);
     }

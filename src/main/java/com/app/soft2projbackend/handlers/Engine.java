@@ -29,16 +29,21 @@ public class Engine {
 
     private Node getNextNode(Flow flow, Node current, ExecutionContext context) {
 
-        List<Connection> outs = flow.getConnectionsFrom(current); // List of Node connections
+        List<Connection> outs = flow.getConnectionsFrom(current);// List of Node connections
+        outs.forEach(o -> {
+            System.out.println(o.isCondition());
+        });
+        System.out.println("------------------------");
 
         if (current.getType() == TipoNodo.CONDITIONAL) {
-            Boolean way = ((ConditionalNode) current).isCondition();
+            boolean way = ((ConditionalNode) current).isCondition();
             System.out.println(way);
-            Connection selConn =  outs.stream()
-                    .filter(c -> c.isCondition(way))
+            Connection selConn = outs.stream()
+                    .filter(c -> c.isCondition() == way)
                     .findFirst()
                     .orElse(null);
             System.out.println(selConn.isCondition());
+            System.out.println(selConn.getToNode());
             return selConn.getToNode();
         }
 

@@ -87,6 +87,6 @@ public class HttpRequestNode extends Node {
         }
 
         // Guardar el resultado en el contexto
-        context.put("httpAtt", success);
+        context.put("conditionResult" + id, success);
     }
 }

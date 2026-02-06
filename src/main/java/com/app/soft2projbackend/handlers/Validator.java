@@ -38,7 +38,7 @@ public class Validator {
 
         while (!queue.isEmpty()) {
             Node current = queue.poll();
-            List<Connection> connections = flow.getConnectionsFrom(current.getId());
+            List<Connection> connections = flow.getConnectionsFrom(current);
 
             for (Connection conn : connections) {
                 Node toNode = conn.getToNode();

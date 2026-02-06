@@ -46,7 +46,6 @@ public class Engine {
                     .findFirst()
                     .orElse(null);
             System.out.println(selConn.isCondition());
-            System.out.println(selConn.getToNode());
             return selConn.getToNode();
         }
 

@@ -33,6 +33,7 @@ public class ConditionalNode extends Node {
         assert val != null;
         boolean way = (boolean) val.getValue();
 
+        this.condition = way;
         context.put("conditionResult", way);
     }
 

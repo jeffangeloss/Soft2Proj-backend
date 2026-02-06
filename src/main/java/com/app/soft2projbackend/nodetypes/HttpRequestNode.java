@@ -8,9 +8,12 @@ import java.net.URI;
 import java.net.http.*;
 
 public class HttpRequestNode extends Node {
-    private String url = "https://script.google.com/macros/s/AKfycbyM6p40ois-vNNIbSBBXCcagOxi2Zp4NR6NKXUBYfaXg4HdFZR5XIAxXLhEr4Txg3goQg/exec";
+    private String url;
     private String method;
     private PoliticaError politica;
+    private int timeout;
+    private int attempts;
+
 
     public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
@@ -20,12 +23,15 @@ public class HttpRequestNode extends Node {
     public void getUrl(String url) {
         this.url = url;
     }
+    public PoliticaError getPolitica() {
+        return politica;
+    }
 
     // setters usados por Jackson
     public void setUrl(String url) {
         this.url = url;
     }
-    public void setInputKey(String method) {
+    public void setMethod(String method) {
         this.method = method;
     }
     public void setPolitica(String politica) {
@@ -34,6 +40,12 @@ public class HttpRequestNode extends Node {
             case "CONTINUE" -> this.politica = PoliticaError.CONTINUE_ON_FAIL;
             default -> this.politica = PoliticaError.STOP_ON_FAIL;
         }
+    }
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
     }
 
     @Override

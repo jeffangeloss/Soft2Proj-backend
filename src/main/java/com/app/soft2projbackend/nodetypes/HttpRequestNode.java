@@ -6,13 +6,14 @@ import tools.jackson.databind.*;
 
 import java.net.URI;
 import java.net.http.*;
+import java.time.Duration;
 
 public class HttpRequestNode extends Node {
     private String url;
     private String method;
     private PoliticaError politica;
-    private int timeout;
-    private int attempts;
+    private int timeout = 5000;
+    private int attempts = 3;
 
 
     public HttpRequestNode() {
@@ -49,19 +50,41 @@ public class HttpRequestNode extends Node {
     }
 
     @Override
-    public void execute(ExecutionContext context) throws Exception {
+    public void execute(ExecutionContext context) {
 
         HttpClient client = HttpClient.newHttpClient();
+        boolean success = false;
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .GET()
-                .build();
+        for (int i = 1; i <= attempts; i++) {
+            try {
+                HttpRequest.Builder builder = HttpRequest.newBuilder()
+                        .uri(URI.create(url))
+                        .timeout(Duration.ofMillis(timeout));
 
-        HttpResponse<Void> response =
-                client.send(request, HttpResponse.BodyHandlers.discarding());
+                // Elegir metodo según JSON
+                if (method.equalsIgnoreCase("GET")) {
+                    builder.GET();
+                } else if (method.equalsIgnoreCase("POST")) {
+                    builder.POST(HttpRequest.BodyPublishers.noBody());
+                } else {
+                    success = false;
+                    break;
+                }
 
-        boolean success = response.statusCode() == 200;
+                HttpRequest request = builder.build();
+
+                HttpResponse<Void> response =
+                        client.send(request, HttpResponse.BodyHandlers.discarding());
+
+                if (response.statusCode() == 200) {
+                    success = true;
+                    break;
+                }
+
+            } catch (Exception e) {
+                success = false;
+            }
+        }
 
         // Guardar el resultado en el contexto
         context.put("httpAtt", success);

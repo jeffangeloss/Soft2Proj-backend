@@ -37,8 +37,8 @@ public class Engine {
                     .filter(c -> c.isCondition(way))
                     .findFirst()
                     .orElse(null);
-            System.out.println(selConn);
             assert selConn != null;
+            System.out.println(selConn.getToNodeId());
             return selConn.getToNode();
         }
 

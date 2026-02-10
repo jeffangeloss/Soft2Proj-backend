@@ -1,8 +1,7 @@
 package com.app.soft2projbackend.nodetypes;
 
-import com.app.soft2projbackend.exceptions.InvalidArgumentException;
+import com.app.soft2projbackend.handlers.*;
 import com.app.soft2projbackend.model.*;
-import tools.jackson.databind.*;
 
 import java.net.URI;
 import java.net.http.*;
@@ -14,18 +13,20 @@ public class HttpRequestNode extends Node {
     private PoliticaError politica;
     private int timeout = 5000;
     private int attempts = 3;
+    private JsonHttpLoop helper;
 
 
     public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
+        this.helper = JsonHttpLoop.getHelper();
     }
 
-    public void getUrl(String url) {
-        this.url = url;
+    public String getUrl(String url) {
+        return this.url;
     }
     public PoliticaError getPolitica() {
-        return politica;
+        return this.politica;
     }
 
     // setters usados por Jackson
@@ -62,7 +63,7 @@ public class HttpRequestNode extends Node {
                         .timeout(Duration.ofMillis(timeout));
 
                 // Elegir metodo según JSON
-                if (method.equalsIgnoreCase("GET")) {
+                if (method == null || method.equalsIgnoreCase("GET")) {
                     builder.GET();
                 } else if (method.equalsIgnoreCase("POST")) {
                     builder.POST(HttpRequest.BodyPublishers.noBody());
@@ -73,10 +74,12 @@ public class HttpRequestNode extends Node {
 
                 HttpRequest request = builder.build();
 
-                HttpResponse<Void> response =
-                        client.send(request, HttpResponse.BodyHandlers.discarding());
+                HttpResponse<String> response =
+                        client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 if (response.statusCode() == 200) {
+                    String jsonResponse = response.body();
+                    helper.saveData(jsonResponse, context, this);
                     success = true;
                     break;
                 }

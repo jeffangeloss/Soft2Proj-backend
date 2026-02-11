@@ -17,8 +17,8 @@ public class ConditionalNode extends Node {
     public void setCondition(boolean condition) {
         this.condition = condition;
     }
-    public void setTargetId(String targetId) {
-        this.targetId = targetId;
+    public void setTargetId(String target) {
+        this.targetId = target;
     }
     public boolean isCondition() {
         return this.condition;

@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ConditionalNode extends Node {
     private boolean condition;
+    private String targetId;
+    private Node target;
 
     public ConditionalNode() {
         this.type = TipoNodo.CONDITIONAL;
@@ -16,9 +18,20 @@ public class ConditionalNode extends Node {
     public void setCondition(boolean condition) {
         this.condition = condition;
     }
-
+    public void setTargetId(String targetId) {
+        this.targetId = targetId;
+    }
     public boolean isCondition() {
-        return condition;
+        return this.condition;
+    }
+    public String getTargetId() {
+        return this.targetId;
+    }
+    public Node getTarget() {
+        return this.target;
+    }
+    public void resolveTarget(Flow flow) {
+        this.target = flow.getNodeById(targetId);
     }
 
     @Override

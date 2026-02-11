@@ -35,6 +35,14 @@ public class Flow {
             c.resolve(this);
         }
     }
+    public void resolveConditionals() {
+        if (nodes == null) return;
+        for (Node n : nodes) {
+            if (n.getType().equals(TipoNodo.CONDITIONAL)) {
+                resolveConditionals();
+            }
+        }
+    }
 
     // Setters sincronizados con las llaves del JSON enviado desde el cliente
     public void setId(String id) { this.id = id; }

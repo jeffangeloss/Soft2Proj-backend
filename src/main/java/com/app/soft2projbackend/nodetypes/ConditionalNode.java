@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ConditionalNode extends Node {
     private boolean condition;
-    private String targetId;
+    private String target;
 
     public ConditionalNode() {
         this.type = TipoNodo.CONDITIONAL;
@@ -18,22 +18,22 @@ public class ConditionalNode extends Node {
         this.condition = condition;
     }
     public void setTargetId(String target) {
-        this.targetId = target;
+        this.target = target;
     }
     public boolean isCondition() {
         return this.condition;
     }
-    public String getTargetId() {
-        return this.targetId;
+    public String getTarget() {
+        return this.target;
     }
 
     @Override
     public void execute(ExecutionContext context) {
         Object lastValue = context.get("conditionResult");
-        Node target = context.getFlow().getNodeById(targetId);
+        Node lokon = context.getFlow().getNodeById(target);
         Variable val = context.getVariableList()
                 .stream()
-                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ target.getId()))
+                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ lokon.getId()))
                 .findFirst()
                 .orElse(null);
         assert val != null;

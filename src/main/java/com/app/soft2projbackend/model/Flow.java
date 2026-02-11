@@ -1,5 +1,7 @@
 package com.app.soft2projbackend.model;
 
+import com.app.soft2projbackend.nodetypes.ConditionalNode;
+
 import java.util.*;
 
 public class Flow {
@@ -37,9 +39,9 @@ public class Flow {
     }
     public void resolveConditionals() {
         if (nodes == null) return;
-        for (Node n : nodes) {
-            if (n.getType().equals(TipoNodo.CONDITIONAL)) {
-                resolveConditionals();
+        for (Node procnode : nodes) {
+            if (procnode.getType().equals(TipoNodo.CONDITIONAL)) {
+                ((ConditionalNode) procnode).resolveTarget(this);
             }
         }
     }

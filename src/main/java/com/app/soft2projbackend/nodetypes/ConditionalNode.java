@@ -8,7 +8,6 @@ import java.util.List;
 public class ConditionalNode extends Node {
     private boolean condition;
     private String targetId;
-    private Node target;
 
     public ConditionalNode() {
         this.type = TipoNodo.CONDITIONAL;
@@ -27,20 +26,14 @@ public class ConditionalNode extends Node {
     public String getTargetId() {
         return this.targetId;
     }
-    public Node getTarget() {
-        return this.target;
-    }
-    public void resolveTarget(Flow flow) {
-        this.target = flow.getNodeById(targetId);
-    }
 
     @Override
     public void execute(ExecutionContext context) {
         Object lastValue = context.get("conditionResult");
-        Node prev = getPrevNode(context.getFlow(),this,context);
+        Node target = context.getFlow().getNodeById(targetId);
         Variable val = context.getVariableList()
                 .stream()
-                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ prev.getId()))
+                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ target.getId()))
                 .findFirst()
                 .orElse(null);
         assert val != null;

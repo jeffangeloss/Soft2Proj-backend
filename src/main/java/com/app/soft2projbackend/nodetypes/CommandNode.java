@@ -29,7 +29,7 @@ public class CommandNode extends Node {
     @Override
     public void setId(String id) {
         this.id = id;
-        this.key = "output_" + id; // Llave donde guardaremos el resultado en el contexto
+        this.key = "output" + id; // Llave donde guardaremos el resultado en el contexto
     }
 
     @Override

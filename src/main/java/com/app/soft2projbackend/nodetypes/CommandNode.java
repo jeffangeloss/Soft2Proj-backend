@@ -29,6 +29,10 @@ public class CommandNode extends Node {
         this.key = "output" + id;
     }
 
+    public String getCommand() {
+        return this.command;
+    }
+
     @Override
     public void execute(ExecutionContext context) throws Exception {
         StepRun reloj = new StepRun(this.id);

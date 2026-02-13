@@ -84,6 +84,7 @@ public class CommandNode extends Node {
             } else {
                 reloj.setError(error); //
                 reloj.markEnd(StepStatus.FAILED); //
+                context.put(key, false);
                 // Si la política es STOP, lanzamos excepción
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);

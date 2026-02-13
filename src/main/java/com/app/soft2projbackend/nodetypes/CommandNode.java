@@ -17,7 +17,7 @@ public class CommandNode extends Node {
 
     public CommandNode() {
         this.type = TipoNodo.COMMAND;
-        this.politica = PoliticaError.CONTINUE_ON_FAIL; //
+        this.politica = PoliticaError.CONTINUE_ON_FAIL;
     }
     public void setCommand(String command) {
         this.command = command;
@@ -31,14 +31,12 @@ public class CommandNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
-        StepRun reloj = new StepRun(this.id); //
-        reloj.markStart(); //
-
+        StepRun reloj = new StepRun(this.id);
+        reloj.markStart();
         if (command == null || command.isBlank()) {
-            reloj.markEnd(StepStatus.FAILED); //
-            throw new InvalidArgumentException(); //
+            reloj.markEnd(StepStatus.FAILED);
+            throw new InvalidArgumentException();
         }
-
         try {
             ProcessBuilder pb = new ProcessBuilder();
 
@@ -53,7 +51,7 @@ public class CommandNode extends Node {
 
             if (!finished) {
                 process.destroyForcibly();
-                reloj.setError("Timeout: El comando tardó demasiado"); //
+                reloj.setError("Timeout: El comando tardó demasiado");
                 reloj.markEnd(StepStatus.FAILED); //
                 throw new RuntimeException("Command timeout");
             }
@@ -69,12 +67,12 @@ public class CommandNode extends Node {
                     .collect(Collectors.joining("\n"));
 
             if (process.exitValue() == 0) {
-                context.put(key, output); // Guardamos la salida en el contexto
-                reloj.setOutput(output); //
-                reloj.markEnd(StepStatus.SUCCESS); //
+                context.put(key, output);
+                reloj.setOutput(output);
+                reloj.markEnd(StepStatus.SUCCESS);
             } else {
-                reloj.setError(error); //
-                reloj.markEnd(StepStatus.FAILED); //
+                reloj.setError(error);
+                reloj.markEnd(StepStatus.FAILED);
                 context.put(key, false);
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);
@@ -82,8 +80,8 @@ public class CommandNode extends Node {
             }
 
         } catch (Exception e) {
-            reloj.setError(e.getMessage()); //
-            reloj.markEnd(StepStatus.FAILED); //
+            reloj.setError(e.getMessage());
+            reloj.markEnd(StepStatus.FAILED);
             throw e;
         }
     }

@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class CommandNode extends Node {
-    // Cambiamos 'int value' por 'String command' para recibir el comando Bash/Terminal
     private String command;
     private String key;
 
@@ -20,8 +19,6 @@ public class CommandNode extends Node {
         this.type = TipoNodo.COMMAND;
         this.politica = PoliticaError.CONTINUE_ON_FAIL; //
     }
-
-    // Setters para que Jackson pueda inyectar los datos desde el JSON
     public void setCommand(String command) {
         this.command = command;
     }
@@ -29,7 +26,7 @@ public class CommandNode extends Node {
     @Override
     public void setId(String id) {
         this.id = id;
-        this.key = "output" + id; // Llave donde guardaremos el resultado en el contexto
+        this.key = "output" + id;
     }
 
     @Override
@@ -43,10 +40,8 @@ public class CommandNode extends Node {
         }
 
         try {
-            // Ejecución a nivel de sistema operativo
             ProcessBuilder pb = new ProcessBuilder();
 
-            // Determinar el shell según el OS (Bash para Mac/Linux, CMD para Windows)
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 pb.command("cmd.exe", "/c", command);
             } else {
@@ -54,8 +49,6 @@ public class CommandNode extends Node {
             }
 
             Process process = pb.start();
-
-            // Timeout de seguridad (5 segundos) para evitar que el backend se cuelgue
             boolean finished = process.waitFor(5, TimeUnit.SECONDS);
 
             if (!finished) {
@@ -65,13 +58,11 @@ public class CommandNode extends Node {
                 throw new RuntimeException("Command timeout");
             }
 
-            // Captura de la salida (stdout)
             String output = new BufferedReader(
                     new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8))
                     .lines()
                     .collect(Collectors.joining("\n"));
 
-            // Captura de errores (stderr)
             String error = new BufferedReader(
                     new InputStreamReader(process.getErrorStream(), StandardCharsets.UTF_8))
                     .lines()
@@ -85,7 +76,6 @@ public class CommandNode extends Node {
                 reloj.setError(error); //
                 reloj.markEnd(StepStatus.FAILED); //
                 context.put(key, false);
-                // Si la política es STOP, lanzamos excepción
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);
                 }

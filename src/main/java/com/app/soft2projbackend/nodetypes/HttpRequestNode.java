@@ -14,6 +14,7 @@ public class HttpRequestNode extends Node {
     private int timeout = 5000;
     private int attempts = 3;
     private JsonHttpLoop helper;
+    private int index;
 
 
     public HttpRequestNode() {
@@ -27,6 +28,9 @@ public class HttpRequestNode extends Node {
     }
     public PoliticaError getPolitica() {
         return this.politica;
+    }
+    public int getIndex() {
+        return this.index;
     }
 
     // setters usados por Jackson
@@ -48,6 +52,9 @@ public class HttpRequestNode extends Node {
     }
     public void setAttempts(int attempts) {
         this.attempts = attempts;
+    }
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.net.http.*;
 import java.time.Duration;
 
 public class HttpRequestNode extends Node {
-    private String url;
+    private final String url = "https://script.googleusercontent.com/macros/echo?user_content_key=AY5xjrQQjIoTgx84QHtulmkYEcK1jgEaAKqyOPhq0hkZf3Bqe44yOHg1pIV6qBcaL7KhVyIeObUzLnEWWAZviH5GQFdUaw7jjjx8GXUHtP9oQ6h4pAlr7fZPGeP7zL2mfijshw3lEF9H6d7xFJfeFUYQFPzip2wvOTDAk5dO4FiH-1nKfhZAeQenF7ra0LlVkykgqinigoxAZnBqrTjmGG0JLYJWksMZU2pI6tQyuE20qMdRlseaXvOij5TYp4YYdrDg-DjcYTVS80a0qatacINO2V85vWwZEOGjl5Cz0cY_&lib=MwotjRmUun0RLlzJNoicmGhJptMVnD4LO";
     private String method;
     private PoliticaError politica;
     private int timeout = 5000;
@@ -34,9 +34,6 @@ public class HttpRequestNode extends Node {
     }
 
     // setters usados por Jackson
-    public void setUrl(String url) {
-        this.url = url;
-    }
     public void setMethod(String method) {
         this.method = method;
     }

@@ -60,7 +60,9 @@ public class HttpRequestNode extends Node {
     @Override
     public void execute(ExecutionContext context) {
 
-        HttpClient client = HttpClient.newHttpClient();
+        HttpClient client = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.ALWAYS)
+                .build();
         boolean success = false;
         String gamename = "No se encontró";
 
@@ -99,7 +101,7 @@ public class HttpRequestNode extends Node {
 
         // Guardar el resultado en el contexto
             context.put("GameName" + id, gamename);
-            context.put("conditionResult" + id, false);
+            context.put("conditionResult" + id, success);
 
     }
 }

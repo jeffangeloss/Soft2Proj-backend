@@ -7,7 +7,6 @@ import tools.jackson.databind.*;
 public class HttpHelper {
     private static HttpHelper helper = null;
     private final ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
 
     private HttpHelper() {}
 
@@ -20,7 +19,13 @@ public class HttpHelper {
 
     public String saveData(String json, ExecutionContext context, HttpRequestNode node) {
         try {
-            JsonNode root = mapper.readTree(json);
+            String cleanJson = json.trim();
+
+            if (cleanJson.startsWith(")]}'")) {
+                cleanJson = cleanJson.substring(4);
+            }
+
+            JsonNode root = mapper.readTree(cleanJson);
 
             if (!root.isArray()) {
                 return "JSON no es un array";
@@ -33,13 +38,14 @@ public class HttpHelper {
                 if (game.has("id") && game.get("id").asInt() == targetId) {
 
                     //context.put("game" + game.get("id").asText(), game.get("nombre").asText());
-                    return game.get("nombre").asString();
+                    return game.get("nombre").asText();
                 }
             }
 
             return "Juego no encontrado";
 
         } catch (Exception e) {
+            e.printStackTrace();   // 🔥 importante para debug
             return "Error procesando JSON";
         }
     }

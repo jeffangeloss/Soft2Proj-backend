@@ -62,6 +62,7 @@ public class HttpRequestNode extends Node {
 
         HttpClient client = HttpClient.newHttpClient();
         boolean success = false;
+        String gamename = "No se encontró";
 
         for (int i = 1; i <= attempts; i++) {
             try {
@@ -86,7 +87,7 @@ public class HttpRequestNode extends Node {
 
                 if (response.statusCode() == 200) {
                     String jsonResponse = response.body();
-                    helper.saveData(jsonResponse, context, this);
+                    gamename = helper.saveData(jsonResponse, context, this);
                     success = true;
                     break;
                 }
@@ -97,6 +98,10 @@ public class HttpRequestNode extends Node {
         }
 
         // Guardar el resultado en el contexto
-        context.put("conditionResult" + id, success);
+        if (success) {
+            context.put("conditionResult" + id, gamename);
+        } else {
+            context.put("conditionResult" + id, false);
+        }
     }
 }

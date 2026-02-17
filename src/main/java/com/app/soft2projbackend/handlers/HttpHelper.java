@@ -32,8 +32,8 @@ public class HttpHelper {
 
                 if (game.has("id") && game.get("id").asInt() == targetId) {
 
-                    context.put("game" + game.get("id").asText(), game.get("nombre").asText());
-                    return "Guardado";
+                    //context.put("game" + game.get("id").asText(), game.get("nombre").asText());
+                    return game.get("nombre").asString();
                 }
             }
 

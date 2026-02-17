@@ -98,10 +98,8 @@ public class HttpRequestNode extends Node {
         }
 
         // Guardar el resultado en el contexto
-        if (success) {
-            context.put("conditionResult" + id, gamename);
-        } else {
+            context.put("GameName" + id, gamename);
             context.put("conditionResult" + id, false);
-        }
+
     }
 }

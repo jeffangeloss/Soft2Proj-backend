@@ -13,17 +13,17 @@ public class HttpRequestNode extends Node {
     private PoliticaError politica;
     private int timeout = 5000;
     private int attempts = 3;
-    private JsonHttpLoop helper;
+    private HttpHelper helper;
     private int index;
 
 
     public HttpRequestNode() {
         this.type = TipoNodo.HTTP_REQUEST;
         this.politica = PoliticaError.CONTINUE_ON_FAIL;
-        this.helper = JsonHttpLoop.getHelper();
+        this.helper = HttpHelper.getHelper();
     }
 
-    public String getUrl(String url) {
+    public String getUrl() {
         return this.url;
     }
     public PoliticaError getPolitica() {

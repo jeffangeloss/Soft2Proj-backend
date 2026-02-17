@@ -32,10 +32,7 @@ public class HttpHelper {
 
                 if (game.has("id") && game.get("id").asInt() == targetId) {
 
-                    context.put("gameId", game.get("id").asInt());
-                    context.put("gameName", game.get("nombre").asText());
-                    context.put("gameDescription", game.get("descripcion").asText());
-                    context.put("gameImage", game.get("imagen").asText());
+                    context.put("game" + game.get("id").asString(), game.get("nombre").asText());
 
                     JsonNode category = game.get("categoria");
                     if (category != null && category.isObject()) {

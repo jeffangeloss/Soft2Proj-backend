@@ -32,13 +32,7 @@ public class HttpHelper {
 
                 if (game.has("id") && game.get("id").asInt() == targetId) {
 
-                    context.put("game" + game.get("id").asString(), game.get("nombre").asText());
-
-                    JsonNode category = game.get("categoria");
-                    if (category != null && category.isObject()) {
-                        context.put("gameCategory", category.get("nombre").asText());
-                    }
-
+                    context.put("game" + game.get("id").asText(), game.get("nombre").asText());
                     return "Guardado";
                 }
             }

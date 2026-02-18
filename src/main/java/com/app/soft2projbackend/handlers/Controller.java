@@ -36,15 +36,4 @@ public class Controller {
     public String ping() {
         return "pong";
     }
-
-    @PostMapping("/debug")
-    public ExecutionContext debugWorkflow(@RequestBody Flow flow) {
-        System.out.println(flow.getNodes().getFirst().getClass());
-        return engine.run(flow);
-    }
-
-    @GetMapping("/askdebug")
-    public String debugGet() {
-        return "Use POST with JSON body";
-    }
 }

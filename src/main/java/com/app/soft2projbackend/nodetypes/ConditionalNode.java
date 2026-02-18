@@ -17,7 +17,7 @@ public class ConditionalNode extends Node {
     public void setCondition(boolean condition) {
         this.condition = condition;
     }
-    public void setTargetId(String target) {
+    public void setTarget(String target) {
         this.target = target;
     }
     public boolean isCondition() {
@@ -29,9 +29,7 @@ public class ConditionalNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        Node prev = getPrevNode(context.getFlow(),this, context);
-        Node lokon = context.getFlow().getNodeById(target);
-        Node toLook = lokon == null ? prev : lokon;
+        Node toLook = context.getFlow().getNodeById(target);
         Variable val = context.getVariableList()
                 .stream()
                 .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ toLook.getId()))

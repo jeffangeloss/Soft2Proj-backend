@@ -29,11 +29,12 @@ public class ConditionalNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) {
-        Object lastValue = context.get("conditionResult");
+        Node prev = getPrevNode(context.getFlow(),this, context);
         Node lokon = context.getFlow().getNodeById(target);
+        Node toLook = lokon == null ? prev : lokon;
         Variable val = context.getVariableList()
                 .stream()
-                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ lokon.getId()))
+                .filter(v -> v.getKey().equalsIgnoreCase("conditionResult"+ toLook.getId()))
                 .findFirst()
                 .orElse(null);
         assert val != null;

@@ -31,14 +31,14 @@ public class HttpHelper {
                 return "JSON no es un array";
             }
 
-            String targetId = node.getIndex();
+            int targetId = node.getIndex();
 
             for (JsonNode game : root) {
 
-                if (game.has("nombre") && game.get("nombre").asText() == targetId) {
+                if (game.has("id") && game.get("id").asInt() == targetId) {
 
                     //context.put("game" + game.get("id").asText(), game.get("nombre").asText());
-                    return game.get("descripcion").asText();
+                    return game.get("nombre").asText();
                 }
             }
 

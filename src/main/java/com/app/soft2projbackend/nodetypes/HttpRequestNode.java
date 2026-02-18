@@ -14,7 +14,7 @@ public class HttpRequestNode extends Node {
     private int timeout = 5000;
     private int attempts = 3;
     private HttpHelper helper;
-    private String index;
+    private int index;
 
 
     public HttpRequestNode() {
@@ -29,7 +29,7 @@ public class HttpRequestNode extends Node {
     public PoliticaError getPolitica() {
         return this.politica;
     }
-    public String getIndex() {
+    public int getIndex() {
         return this.index;
     }
 
@@ -50,7 +50,7 @@ public class HttpRequestNode extends Node {
     public void setAttempts(int attempts) {
         this.attempts = attempts;
     }
-    public void setIndex(String index) {
+    public void setIndex(int index) {
         this.index = index;
     }
 

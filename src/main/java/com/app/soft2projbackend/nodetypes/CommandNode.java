@@ -44,11 +44,7 @@ public class CommandNode extends Node {
         try {
             ProcessBuilder pb = new ProcessBuilder();
 
-            if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                pb.command("cmd.exe", "/c", command);
-            } else {
-                pb.command("bash", "-c", command);
-            }
+            pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
             boolean finished = process.waitFor(5, TimeUnit.SECONDS);

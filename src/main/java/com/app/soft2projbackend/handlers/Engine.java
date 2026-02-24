@@ -30,7 +30,7 @@ public class Engine {
         return context;
     }
 
-    private Node getNextNode(Flow flow, Node current, ExecutionContext context) {
+    public Node getNextNode(Flow flow, Node current, ExecutionContext context) {
 
         List<Connection> outs = flow.getConnectionsFrom(current);// List of Node connections
         outs.forEach(o -> {

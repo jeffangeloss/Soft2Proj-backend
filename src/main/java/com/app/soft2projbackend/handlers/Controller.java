@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {
         "http://localhost:3000",
         "http://192.168.5.2:3000"
-}) // Escucha solo en http://localhost:8080/api/workflows/run si se va a probar el backend y frontend en una misma pc
+})
 public class Controller {
 
     private final Engine engine;

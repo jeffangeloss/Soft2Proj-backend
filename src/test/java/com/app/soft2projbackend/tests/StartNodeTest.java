@@ -25,7 +25,6 @@ public class StartNodeTest {
     void killStartNodeMutants() {
         startNode.execute(context);
 
-        // Capturamos para detectar si un mutante cambia el string "started" o el boolean true
         ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
 

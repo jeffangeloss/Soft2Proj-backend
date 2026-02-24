@@ -28,19 +28,16 @@ public class ConditionalNodeTest {
 
     @Test
     void killConditionalMutants() {
-        // Configuramos el escenario
         conditionalNode.setTarget("T1");
         when(context.getFlow()).thenReturn(flow);
         when(flow.getNodeById("T1")).thenReturn(targetNode);
         when(targetNode.getId()).thenReturn("T1");
 
-        // Simulamos variable en MAYÚSCULAS para matar mutantes que cambien 'equalsIgnoreCase' por 'equals'
         Variable var = new Variable("CONDITIONRESULTT1", true);
         when(context.getVariableList()).thenReturn(List.of(var));
 
         conditionalNode.execute(context);
 
-        // Si un mutante invierte la lógica, esto fallará
         assertTrue(conditionalNode.isCondition(), "ERROR: Mutante invirtió la decisión lógica");
     }
 }

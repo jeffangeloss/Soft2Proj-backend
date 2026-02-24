@@ -74,12 +74,14 @@ public class CommandNode extends Node {
                 reloj.setError(error);
                 reloj.markEnd(StepStatus.FAILED);
                 context.put(key, false);
+                context.put("conditionResult" + id, true);
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);
                 }
             }
 
         } catch (Exception e) {
+            context.put("conditionResult" + id, false);
             reloj.setError(e.getMessage());
             reloj.markEnd(StepStatus.FAILED);
             throw e;

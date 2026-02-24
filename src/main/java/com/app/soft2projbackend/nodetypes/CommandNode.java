@@ -68,18 +68,21 @@ public class CommandNode extends Node {
 
             if (process.exitValue() == 0) {
                 context.put(key, output);
+                context.put("conditionResult" + id, true);
                 reloj.setOutput(output);
                 reloj.markEnd(StepStatus.SUCCESS);
             } else {
                 reloj.setError(error);
                 reloj.markEnd(StepStatus.FAILED);
                 context.put(key, false);
+                context.put("conditionResult" + id, false);
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);
                 }
             }
 
         } catch (Exception e) {
+            context.put("conditionResult" + id, false);
             reloj.setError(e.getMessage());
             reloj.markEnd(StepStatus.FAILED);
             throw e;

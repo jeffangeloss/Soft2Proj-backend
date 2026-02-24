@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class EngineTest {
+public class EngineRunTest {
     @InjectMocks
     private Engine engine;
 

@@ -35,8 +35,8 @@ public abstract class Node {
     public void setType(TipoNodo type) { this.type = type; }
     public void setPolitica(PoliticaError politica) { this.politica = politica; }
 
-    protected Node getPrevNode(Flow flow, Node current, ExecutionContext context) {
-        List<Connection> outs = flow.getConnectionsTo(current);
+    protected Node getPrevNode(Node current, ExecutionContext context) {
+        List<Connection> outs = context.getFlow().getConnectionsTo(current);
         if (outs.size() > 1) throw new MultipleConnectionsException();
         return outs.getFirst().getFromNode();// List of Node connections
     }

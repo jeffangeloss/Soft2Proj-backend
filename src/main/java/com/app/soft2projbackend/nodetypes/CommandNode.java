@@ -32,19 +32,22 @@ public class CommandNode extends Node {
         return this.command;
     }
 
-    private String resolveLastOutput(ExecutionContext context) {
-        Node last = getPrevNode(context.getFlow(), this, context);
+    private void resolveLastOutput(ExecutionContext context) {
+        Node last = getPrevNode(this, context);
+        if (!(last instanceof CommandNode)) return;
         Variable val = context.getVariableList()
                 .stream()
                 .filter(v -> v.getKey().equalsIgnoreCase("exeResult"+ last.getId()))
                 .findFirst()
                 .orElse(null);
-        assert val != null;
-        return (String) val.getValue();
+        if (val == null || val.getValue() == null) return;
+        String prevResult = ((String) val.getValue()) .trim();
+        this.command = command + " " + prevResult;
     }
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
+        resolveLastOutput(context);
         StepRun reloj = new StepRun(this.id);
         reloj.markStart();
         if (command == null || command.isBlank()) {
@@ -54,8 +57,7 @@ public class CommandNode extends Node {
         try {
             ProcessBuilder pb = new ProcessBuilder();
             pb.directory(new File("comandos"));
-            String resolvedCommand = resolveLastOutput(context);
-            pb.command("cmd.exe", "/c", resolvedCommand);
+            pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
             boolean finished = process.waitFor(5, TimeUnit.SECONDS);

@@ -32,8 +32,36 @@ public class CommandNode extends Node {
         return this.command;
     }
 
+    private String resolveCommandVariables(String command, ExecutionContext context) {
+        String resolved = command;
+
+        for (Variable variable : context.getVariableList()) {
+            String key = variable.getKey();
+            Object value = context.get(key);
+            if (value != null) {
+                resolved = resolved.replace("${" + key + "}", value.toString());
+            }
+        }
+
+        return resolved;
+    }
+
+    private void resolveLastOutput(ExecutionContext context) {
+        Node last = getPrevNode(this, context);
+        if (!(last instanceof CommandNode)) return;
+        Variable val = context.getVariableList()
+                .stream()
+                .filter(v -> v.getKey().equalsIgnoreCase("exeResult"+ last.getId()))
+                .findFirst()
+                .orElse(null);
+        if (val == null || val.getValue() == null) return;
+        String prevResult = ((String) val.getValue()) .trim();
+        this.command = command + " " + prevResult;
+    }
+
     @Override
     public void execute(ExecutionContext context) throws Exception {
+        resolveLastOutput(context);
         StepRun reloj = new StepRun(this.id);
         reloj.markStart();
         if (command == null || command.isBlank()) {

@@ -41,10 +41,4 @@ public class ConditionalNode extends Node {
         this.condition = way;
         context.put("conditionResult", way);
     }
-
-    private Node getPrevNode(Flow flow, Node current, ExecutionContext context) {
-        List<Connection> outs = flow.getConnectionsTo(current);
-        if (outs.size() > 1) throw new MultipleConnectionsException();
-        return outs.getFirst().getFromNode();// List of Node connections
-    }
 }

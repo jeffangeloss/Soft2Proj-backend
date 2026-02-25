@@ -64,6 +64,9 @@ public class CommandNode extends Node {
                     .lines()
                     .collect(Collectors.joining("\n"));
 
+            System.out.println("Exit code: " + process.exitValue());
+            System.out.println("STDOUT: " + output);
+            System.out.println("STDERR: " + error);
             if (process.exitValue() == 0) {
                 context.put(key, output);
                 context.put("conditionResult" + id, true);

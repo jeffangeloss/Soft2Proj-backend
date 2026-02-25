@@ -70,8 +70,12 @@ public class CommandNode extends Node {
 
             if (process.exitValue() == 0) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                 context.put("output" + id, output);
+=======
+                context.put(key, output);
+>>>>>>> parent of 6992954 (Update CommandNode.java)
 =======
                 context.put(key, output);
 >>>>>>> parent of 6992954 (Update CommandNode.java)

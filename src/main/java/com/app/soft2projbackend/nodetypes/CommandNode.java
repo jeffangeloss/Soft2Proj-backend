@@ -68,6 +68,9 @@ public class CommandNode extends Node {
             System.out.println("STDOUT: " + output);
             System.out.println("STDERR: " + error);
             if (process.exitValue() == 0) {
+                String[] lines = output.split("\\R"); // separa por saltos de línea
+                String lastLine = lines.length > 0 ? lines[lines.length - 1].trim() : "";
+                context.put(key, lastLine);
                 context.put(key, output);
                 context.put("conditionResult" + id, true);
                 reloj.setOutput(output);

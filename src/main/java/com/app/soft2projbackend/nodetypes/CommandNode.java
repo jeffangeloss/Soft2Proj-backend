@@ -45,7 +45,7 @@ public class CommandNode extends Node {
             pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
-            boolean finished = process.waitFor(5, TimeUnit.SECONDS);
+            boolean finished = process.waitFor(10, TimeUnit.SECONDS);
 
             if (!finished) {
                 process.destroyForcibly();

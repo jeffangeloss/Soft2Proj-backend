@@ -60,7 +60,7 @@ public class CommandNode extends Node {
             pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
-            boolean finished = process.waitFor(40, TimeUnit.SECONDS);
+            boolean finished = process.waitFor(5, TimeUnit.SECONDS);
 
             if (!finished) {
                 process.destroyForcibly();
@@ -91,6 +91,7 @@ public class CommandNode extends Node {
 
                 context.put(key, output);                 // output completo
                 context.put("exeResult" + id, lastLine);     // solo el valor final
+                context.put(key, lastLine);     // solo el valor final
                 context.put("conditionResult" + id, true);
                 reloj.setOutput(output);
                 reloj.markEnd(StepStatus.SUCCESS);

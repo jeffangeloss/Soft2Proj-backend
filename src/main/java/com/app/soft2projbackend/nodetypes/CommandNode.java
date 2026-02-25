@@ -34,27 +34,24 @@ public class CommandNode extends Node {
 
     @Override
     public void execute(ExecutionContext context) throws Exception {
-
         StepRun reloj = new StepRun(this.id);
         reloj.markStart();
-
         if (command == null || command.isBlank()) {
             reloj.markEnd(StepStatus.FAILED);
             throw new InvalidArgumentException();
         }
-
         try {
             ProcessBuilder pb = new ProcessBuilder();
             pb.directory(new File("comandos"));
             pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
-            boolean finished = process.waitFor(10, TimeUnit.SECONDS);
+            boolean finished = process.waitFor(40, TimeUnit.SECONDS);
 
             if (!finished) {
                 process.destroyForcibly();
                 reloj.setError("Timeout: El comando tardó demasiado");
-                reloj.markEnd(StepStatus.FAILED);
+                reloj.markEnd(StepStatus.FAILED); //
                 throw new RuntimeException("Command timeout");
             }
 
@@ -68,19 +65,25 @@ public class CommandNode extends Node {
                     .lines()
                     .collect(Collectors.joining("\n"));
 
+            System.out.println("Exit code: " + process.exitValue());
+            System.out.println("STDOUT: " + output);
+            System.out.println("STDERR: " + error);
             if (process.exitValue() == 0) {
 
-                context.put("output" + id, output);
+                String[] lines = output.split("\\R"); // separa por saltos de línea
+
+                String lastLine = lines.length > 0 ? lines[lines.length - 1].trim() : "";
+
+                context.put(key, output);                 // output completo
+                context.put("exeResult" + id, lastLine);     // solo el valor final
                 context.put("conditionResult" + id, true);
                 reloj.setOutput(output);
                 reloj.markEnd(StepStatus.SUCCESS);
-
             } else {
-
-                context.put("conditionResult" + id, false);
                 reloj.setError(error);
                 reloj.markEnd(StepStatus.FAILED);
-
+                context.put(key, false);
+                context.put("conditionResult" + id, false);
                 if (this.politica == PoliticaError.STOP_ON_FAIL) {
                     throw new RuntimeException("Error en comando: " + error);
                 }

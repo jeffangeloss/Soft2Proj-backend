@@ -32,6 +32,20 @@ public class CommandNode extends Node {
         return this.command;
     }
 
+    private String resolveCommandVariables(String command, ExecutionContext context) {
+        String resolved = command;
+
+        for (Variable variable : context.getVariableList()) {
+            String key = variable.getKey();
+            Object value = context.get(key);
+            if (value != null) {
+                resolved = resolved.replace("${" + key + "}", value.toString());
+            }
+        }
+
+        return resolved;
+    }
+
     private void resolveLastOutput(ExecutionContext context) {
         Node last = getPrevNode(this, context);
         if (!(last instanceof CommandNode)) return;
@@ -84,10 +98,9 @@ public class CommandNode extends Node {
             System.out.println("STDERR: " + error);
             if (process.exitValue() == 0) {
 
-                List<String> lines = output.lines()
-                        .filter(l -> !l.isBlank())
-                        .toList();
-                String lastLine = lines.isEmpty() ? "" : lines.get(lines.size() - 1);
+                String[] lines = output.split("\\R"); // separa por saltos de línea
+
+                String lastLine = lines.length > 0 ? lines[lines.length - 1].trim() : "";
 
                 context.put(key, output);                 // output completo
                 context.put("exeResult" + id, lastLine);     // solo el valor final

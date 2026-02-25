@@ -2,11 +2,9 @@ package com.app.soft2projbackend.nodetypes;
 
 import com.app.soft2projbackend.exceptions.*;
 import com.app.soft2projbackend.model.*;
-import com.app.soft2projbackend.steprun.StepRun;
-import com.app.soft2projbackend.steprun.StepStatus;
+import com.app.soft2projbackend.steprun.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -43,7 +41,7 @@ public class CommandNode extends Node {
         }
         try {
             ProcessBuilder pb = new ProcessBuilder();
-
+            pb.directory(new File("comandos"));
             pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();

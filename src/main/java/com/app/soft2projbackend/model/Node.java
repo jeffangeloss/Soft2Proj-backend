@@ -1,10 +1,7 @@
 package com.app.soft2projbackend.model;
 
-import com.app.soft2projbackend.exceptions.MultipleConnectionsException;
 import com.app.soft2projbackend.nodetypes.*;
 import com.fasterxml.jackson.annotation.*;
-
-import java.util.List;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -34,12 +31,6 @@ public abstract class Node {
     public void setName(String name) { this.name = name; }
     public void setType(TipoNodo type) { this.type = type; }
     public void setPolitica(PoliticaError politica) { this.politica = politica; }
-
-    protected Node getPrevNode(Flow flow, Node current, ExecutionContext context) {
-        List<Connection> outs = flow.getConnectionsTo(current);
-        if (outs.size() > 1) throw new MultipleConnectionsException();
-        return outs.getFirst().getFromNode();// List of Node connections
-    }
 
     public abstract void execute(ExecutionContext context) throws Exception;
 }

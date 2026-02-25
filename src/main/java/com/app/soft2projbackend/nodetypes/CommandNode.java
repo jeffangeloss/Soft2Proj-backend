@@ -6,7 +6,6 @@ import com.app.soft2projbackend.steprun.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -32,17 +31,6 @@ public class CommandNode extends Node {
         return this.command;
     }
 
-    private String resolveLastOutput(ExecutionContext context) {
-        Node last = getPrevNode(context.getFlow(), this, context);
-        Variable val = context.getVariableList()
-                .stream()
-                .filter(v -> v.getKey().equalsIgnoreCase("exeResult"+ last.getId()))
-                .findFirst()
-                .orElse(null);
-        assert val != null;
-        return (String) val.getValue();
-    }
-
     @Override
     public void execute(ExecutionContext context) throws Exception {
         StepRun reloj = new StepRun(this.id);
@@ -54,8 +42,7 @@ public class CommandNode extends Node {
         try {
             ProcessBuilder pb = new ProcessBuilder();
             pb.directory(new File("comandos"));
-            String resolvedCommand = resolveLastOutput(context);
-            pb.command("cmd.exe", "/c", resolvedCommand);
+            pb.command("cmd.exe", "/c", command);
 
             Process process = pb.start();
             boolean finished = process.waitFor(5, TimeUnit.SECONDS);
@@ -81,14 +68,8 @@ public class CommandNode extends Node {
             System.out.println("STDOUT: " + output);
             System.out.println("STDERR: " + error);
             if (process.exitValue() == 0) {
-
-                List<String> lines = output.lines()
-                        .filter(l -> !l.isBlank())
-                        .toList();
-                String lastLine = lines.isEmpty() ? "" : lines.get(lines.size() - 1);
-
-                context.put(key, output);                 // output completo
-                context.put("exeResult" + id, lastLine);     // solo el valor final
+                String[] lines = output.split("\\R"); // separa por saltos de línea
+                String lastLine = lines.length > 0 ? lines[lines.length - 1].trim() : "";
                 context.put(key, lastLine);     // solo el valor final
                 context.put("conditionResult" + id, true);
                 reloj.setOutput(output);

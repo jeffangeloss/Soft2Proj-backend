@@ -1,38 +1,34 @@
 package com.app.soft2projbackend.tests;
 
 import com.app.soft2projbackend.model.ExecutionContext;
-import com.app.soft2projbackend.model.Variable;
-import org.junit.jupiter.api.BeforeEach;
+import com.app.soft2projbackend.model.Flow;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 public class ExecutionContextTest {
 
+    @Mock
+    private Flow flow;
+
+    @InjectMocks
     private ExecutionContext context;
 
-    @BeforeEach
-    void setUp() {
-        context = new ExecutionContext();
+    @Test
+    void killUpdateLogicMutants() {
+        context.put("keyTest", "valorInicial");
+        context.put("keyTest", "valorActualizado");
+        assertEquals(1, context.getVariableList().size(), "ERROR: Se duplicó la variable en lugar de actualizar");
+        assertEquals("valorActualizado", context.get("keyTest"), "El valor de la variable no se actualizó");
     }
 
     @Test
-    void testPutAndGetVariable() {
-        context.put("testKey", "testValue");
-        assertEquals("testValue", context.get("testKey"), "Mata mutante: Fallo al recuperar valor");
-    }
-
-    @Test
-    void testUpdateExistingVariable() {
-        context.put("key1", "initial");
-        context.put("key1", "updated");
-
-        assertEquals(1, context.getVariableList().size(), "Mata mutante: Se duplicó la variable en lugar de actualizar");
-        assertEquals("updated", context.get("key1"), "Mata mutante: No se actualizó el valor correctamente");
-    }
-
-    @Test
-    void testGetNonExistentVariableReturnsNull() {
-        assertNull(context.get("ghostKey"), "Mata mutante: Debería retornar null para llaves inexistentes");
+    void testGetReturnsNullWhenKeyMissing() {
+        assertNull(context.get("llave_fantasma"), "Debería retornar null para llaves que no existen");
     }
 }

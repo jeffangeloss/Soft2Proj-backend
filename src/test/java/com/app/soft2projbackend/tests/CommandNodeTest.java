@@ -1,6 +1,8 @@
 package com.app.soft2projbackend.tests;
 
+import com.app.soft2projbackend.exceptions.InvalidArgumentException;
 import com.app.soft2projbackend.model.ExecutionContext;
+import com.app.soft2projbackend.model.PoliticaError;
 import com.app.soft2projbackend.nodetypes.CommandNode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,10 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CommandNodeTest {
@@ -24,18 +24,33 @@ public class CommandNodeTest {
     private CommandNode commandNode;
 
     @Test
-    void killCommandKeyMutants() throws Exception {
+    void killCommandLogicMutants() throws Exception {
         commandNode.setId("C1");
-        commandNode.setCommand("echo test");
+        commandNode.setCommand("echo primera & echo segunda & echo linea_final");
+        commandNode.execute(context);
 
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            commandNode.execute(context);
+        ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<Object> valCaptor = ArgumentCaptor.forClass(Object.class);
+        verify(context, atLeastOnce()).put(keyCaptor.capture(), valCaptor.capture());
 
-            ArgumentCaptor<String> keyCaptor = ArgumentCaptor.forClass(String.class);
-            verify(context, atLeastOnce()).put(keyCaptor.capture(), any());
+        assertTrue(keyCaptor.getAllValues().contains("outputC1"), "La llave 'outputC1' no fue generada");
+        assertTrue(valCaptor.getAllValues().contains("linea_final"), "No se capturó la última línea del comando");
+        assertTrue(keyCaptor.getAllValues().contains("conditionResultC1"), "Falta la llave de condición");
+        assertTrue(valCaptor.getAllValues().contains(true), "El resultado de la condición debería ser true");
+    }
 
-            assertTrue(keyCaptor.getAllValues().contains("outputC1"), "ERROR: Mutante alteró la llave 'output'");
-            assertTrue(keyCaptor.getAllValues().contains("conditionResultC1"), "ERROR: Mutante alteró la llave de condición");
-        }
+    @Test
+    void testInvalidArgumentException() {
+        commandNode.setCommand(null);
+
+        assertThrows(InvalidArgumentException.class, () -> commandNode.execute(context),
+                "Mata mutante: La protección contra comandos nulos fue alterada");
+    }
+
+    @Test
+    void testStopOnFailPolicy() {
+        commandNode.setPolitica(PoliticaError.STOP_ON_FAIL);
+        commandNode.setCommand("comando_erroneo_para_test");
+        assertThrows(RuntimeException.class, () -> commandNode.execute(context));
     }
 }

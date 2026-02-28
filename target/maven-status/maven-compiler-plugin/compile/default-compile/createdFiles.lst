@@ -10,7 +10,6 @@ com\app\soft2projbackend\exceptions\InvalidKeyException.class
 com\app\soft2projbackend\model\Node.class
 com\app\soft2projbackend\model\Variable.class
 com\app\soft2projbackend\nodetypes\HttpRequestNode.class
-com\app\soft2projbackend\tests\WorkflowValidatorTest.class
 com\app\soft2projbackend\model\Connection.class
 com\app\soft2projbackend\exceptions\MultipleConnectionsException.class
 com\app\soft2projbackend\model\PoliticaError.class

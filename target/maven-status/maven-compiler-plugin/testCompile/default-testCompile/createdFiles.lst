@@ -1,1 +1,11 @@
+com\app\soft2projbackend\tests\StartNodeTest.class
+com\app\soft2projbackend\tests\WorkflowValidatorTest.class
+com\app\soft2projbackend\tests\CommandNodeTest.class
+com\app\soft2projbackend\tests\EngineRunTest.class
+com\app\soft2projbackend\tests\NodeTest$1.class
+com\app\soft2projbackend\tests\FlowGetConnectionsTest.class
+com\app\soft2projbackend\tests\ConditionalNodeTest.class
+com\app\soft2projbackend\tests\EngineNextNodeTest.class
+com\app\soft2projbackend\tests\NodeTest.class
+com\app\soft2projbackend\tests\ExecutionContextTest.class
 com\app\soft2projbackend\Soft2ProjBackendApplicationTests.class
